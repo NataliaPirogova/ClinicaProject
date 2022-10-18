@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration form</title>
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<form th:action="@{/registrationVolunteerHabitsInfo}" method="post" th:object="${volunteerHabitsInfo}">
+<!--    <input hidden th:value="${volunteerHabitsInfo.setVolunteer(volunteerByID)}" th:field="*{volunteer}">-->
+<!--    <input th:field="*{product.producer}" th:value="${product.setProducer(producer)}"-->
+<!--             th:name="producer" hidden>-->
+    <label for="smoking">Do you smoke?
+        <select id="smoking" th:field="*{smoking}">
+            <option value="NO">Never smoke or try several times</option>
+            <option value="SMOKE_EARLIER">Smoke earlier</option>
+            <option value="SMOKE_SEVERAL_TIMES_A_MONTH">Smoke several times a month</option>
+            <option value="SMOKE_1_TIME_A_WEEK_OR_MORE_OFTEN">Smoke one time a week or more often</option>
+        </select>
+    </label><br>
+    <label for="takingDrugs">Are you taking drugs?
+        <select id="takingDrugs" th:field="*{takingDrugs}">
+            <option th:value="NO">No</option>
+            <option th:value="NOT_NOW_BUT_EARLIER">Not now, but earlier</option>
+            <option th:value="YES">Yes</option>
+        </select></label><br>
+    <label for="takingMedicines">I take any medicine permanently
+        <input type="checkbox" id="takingMedicines"/>
+    </label><br>
+    <label for="isPregnantNow" th:if="${volunteer.gender == 'FEMALE'}">I am pregnant now
+        <input type="checkbox" id="isPregnantNow"/></label><br></span>
+    <label for="isPlanningPregnancy" th:if="${volunteer.gender == 'FEMALE'}">Do you planning pregnancy?
+        <select id="isPlanningPregnancy" th:field="*{isPlanningPregnancy}">
+            <option th:value="PLANNING_THIS_YEAR">Planning this year</option>
+            <option th:value="PLANNING_A_YEAR_AFTER_OR_LATER">Planning a year after or later</option>
+            <option th:value="NOT_PLANNING">Not planning</option>
+        </select></label><br>
+    <label for="vegetarian"> I am vegetarian
+        <input type="checkbox" id="vegetarian" name="vegetarian"/>
+    </label><br>
+    <label for="takingHormonalContraceptives">I am taking hormonal contraceptives now
+        <input type="checkbox" id="takingHormonalContraceptives"></label><br>
+    <label for="sport">Do you make sport in your life?
+        <select id="sport" th:field="*{sport}">
+            <option value="NO">No</option>
+            <option value="PROFESSIONAL">I am professional sportsman</option>
+            <option value="AMATEUR_SPORTS">I am amateur sportsman</option>
+        </select></label><br>
+    <label for="alcohol">How often do you drink alcohol?
+        <select id="alcohol" th:field="*{alcohol}">
+            <option value="NO">No at all</option>
+            <option value="EVERY_DAY">Every day</option>
+            <option value="ONLY_ON_HOLIDAYS">Only on holidays</option>
+            <option value="ONE_OR_TWO_TIMES_A_WEEK">One or two times a week</option>
+        </select></label><br>
+    <input type="submit">
+</form>
+</body>
+</html>

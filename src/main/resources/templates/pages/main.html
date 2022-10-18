@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<meta charset="UTF-8">
+<head>
+    <title>Main page</title>
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+
+<h1>Main page</h1>
+<a th:href="@{healthcareorganizations}">Organizations</a><br>
+<a th:href="@{registerVolunteer}">I want to register as a volunteer</a><br>
+<a th:href="@{contacts}">Contact information</a><br>
+<a th:href="@{medicine}">Register medicine</a><br>
+<a th:href="@{volunteersAll}">Find all volunteers in database</a>
+<footer th:insert="blocks/header :: footer"></footer>
+</body>
+</html>

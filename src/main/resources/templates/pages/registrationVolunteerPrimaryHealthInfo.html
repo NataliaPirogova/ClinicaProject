@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration form</title>
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<form th:action="@{/registrationVolunteerPrimaryHealthInfo}" th:method="post" th:object="${volunteerPrimaryHealthInfo}">
+    <label for="height">Your height in millimeteres:
+        <input type="number" id="height" max="257" th:field="*{height}">
+    </label><br>
+    <label for="weight">Your weight in kg:
+        <input type="number" id="weight" th:field="*{weight}">
+    </label><br>
+    <label for="pulse">Your pulse now:
+        <input type="number" id="pulse" th:field="*{pulse}">
+    </label><br>
+    <label for="bloodPressureSystolic">Your blood pressure now:
+        <input type="number" id="bloodPressureSystolic" th:field="*{bloodPressureSystolic}">/
+    </label>
+    <label for="bloodPressureDiastolic">
+        <input type="number" id="bloodPressureDiastolic" th:field="*{bloodPressureDiastolic}">
+    </label><br>
+    <input type="submit">
+</form>
+</body>
+</html>

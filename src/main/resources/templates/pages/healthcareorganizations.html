@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<meta charset="UTF-8">
+<head>
+    <title>Healthcare Organizations</title>
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<h1>On this page you can view organizations were clinical research hold</h1>
+<h2>Organizations</h2>
+<ul th:each="healthcareOrganization, i: ${healthcareOrganizations}">
+    <li th:text="${healthcareOrganization}"></li>
+</ul>
+</body>
+</html>

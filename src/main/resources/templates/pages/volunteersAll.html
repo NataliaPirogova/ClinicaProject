@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All volunteers</title>
+</head>
+<body>
+<h3>All registered volunteers</h3>
+
+<table>
+    <tr>
+        <!--        <th>Id volunteer</th>-->
+        <th>Date of Birth</th>
+        <th>Age</th>
+        <th>email</th>
+        <th>First name</th>
+        <th>Middle name</th>
+        <th>Last name</th>
+        <th>Gender</th>
+        <th>Phone</th>
+    </tr>
+    <tr>
+        <th>
+            <label for="DoB"></label>
+            <input type="date" id="DoB"></input>
+        </th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>
+            <label for="gender"></label>
+            <select id="gender">
+                <option th:value="FEMALE">female</option>
+                <option th:value="MALE">male</option>
+            </select>
+        </th>
+    </tr>
+    <tr th:each="volunteer, i: ${volunteers}">
+        <!--        <td th:utext="${volunteer.id}"></td>-->
+        <td th:utext="${volunteer.doB}"></td>
+        <td th:utext="${volunteer.email}"></td>
+        <td th:utext="${volunteer.firstName}"></td>
+        <td th:utext="${volunteer.middleName}"></td>
+        <td th:utext="${volunteer.lastName}"></td>
+        <td th:utext="${volunteer.gender}"></td>
+        <td th:utext="${volunteer.phoneNumber}"></td>
+    </tr>
+</table>
+
+
+</body>
+</html>

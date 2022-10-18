@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All medicines</title>
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<p>List of medicines on clinical trials at this time</p>
+
+<table>
+    <tr>
+        <th>Name of medicine</th>
+        <th>Name of manufacturer</th>
+        <th>City of manufacturer</th>
+        <th>Country of manufacturer</th>
+    </tr>
+    <tr th:each="medicine, i : ${medicines}">
+        <td th:utext="${medicine.medicineName}"></td>
+        <td th:utext="${medicine.manufacturer.name}"></td>
+        <td th:utext="${medicine.manufacturer.city}"></td>
+        <td th:utext="${medicine.manufacturer.countryOfOrigin}"></td>
+    </tr>
+</table>
+
+
+<a th:href="@{medicine/add}">Add new</a>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/" lang="en">
+<meta charset="UTF-8">
+<head>
+    <title>Registration form</title>
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<h1>Fill in the form to register as a volunteer</h1>
+<form th:action="@{/registrationVolunteer}" method="post" th:object="${volunteer}">
+    <label for="firstName">First name
+        <input th:type="text" id="firstName" placeholder="firstName" th:field="*{firstName}" required>
+    </label><br>
+    <label for="lastName">Last name
+    <input th:type="text" id="lastName" placeholder="lastName" th:field="*{lastName}" required></label><br>
+    <label for="middleName">Middle name
+    <input th:type="text" id="middleName" placeholder="middleName" th:field="*{middleName}" required></label><br>
+    <label for="doB">Date of Birth
+    <input type="date" id="doB" th:field="*{doB}" required></label><br>
+    <label for="gender">Gender
+    <select id="gender" th:field="*{gender}" required>
+        <option th:value="FEMALE">female</option>
+        <option th:value="MALE">male</option>
+    </select></label><br>
+    <label for="phoneNumber">Phone number
+    <input th:type="text" id="phoneNumber" th:field="*{phoneNumber}"
+           pattern="^(\+375|80)(29|25|44|33)(\d{3})(\d{2})(\d{2})$" required></label><br>
+    <label for="email">Email
+    <input th:type="text" id="email" th:field="*{email}" required></label><br>
+    <label for="password">Password
+        <input th:type="password" id="password" th:field="*{password}" required></label><br>
+    <input type="submit">
+</form>
+<footer th:insert="blocks/header :: footer"></footer>
+</body>
+</html>

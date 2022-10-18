@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Smoking</th>
+        <th>Take drugs</th>
+        <th>Take medicines</th>
+        <th>Is pregnant</th>
+        <th>Is planning pregnancy</th>
+        <th>Vegeterian</th>
+        <th>Take hormonal contraceptives</th>
+        <th>Sport</th>
+        <th>Alcohol</th>
+        <th>Volunteer's id</th>
+    </tr>
+    <tr th:each="volunteerHabitsInfo, i : ${volunteerHabitsInfos}">
+        <td th:utext="${volunteerHabitsInfo.id}"></td>
+        <td th:utext="${volunteerHabitsInfo.smoking}"></td>
+        <td th:utext="${volunteerHabitsInfo.takingDrugs}"></td>
+        <td th:utext="${volunteerHabitsInfo.takingMedicines}"></td>
+        <td th:utext="${volunteerHabitsInfo.pregnantNow}"></td>
+        <td th:utext="${volunteerHabitsInfo.isPlanningPregnancy}"></td>
+        <td th:utext="${volunteerHabitsInfo.vegetarian}"></td>
+        <td th:utext="${volunteerHabitsInfo.takingHormonalContraceptives}"></td>
+        <td th:utext="${volunteerHabitsInfo.sport}"></td>
+        <td th:utext="${volunteerHabitsInfo.alcohol}"></td>
+        <td th:utext="${volunteerHabitsInfo.volunteer.id}"></td>
+    </tr>
+</table>
+
+</body>
+</html>
