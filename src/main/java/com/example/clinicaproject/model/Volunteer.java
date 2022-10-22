@@ -18,6 +18,7 @@ public class Volunteer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private final Role role = Role.VOLUNTEER;
     private String firstName;//имя
     private String lastName;//фамилия
     private String middleName;//отчество

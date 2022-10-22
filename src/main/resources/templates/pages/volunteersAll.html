@@ -20,24 +20,33 @@
         <th>Phone</th>
     </tr>
     <tr>
-        <th>
-            <label for="DoB"></label>
-            <input type="date" id="DoB"></input>
-        </th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th>
-            <label for="gender"></label>
-            <select id="gender">
-                <option th:value="FEMALE">female</option>
-                <option th:value="MALE">male</option>
-            </select>
-        </th>
+        <form th:action="@{/volunteersAll}" method="post">
+            <th></th>
+            <th>
+                <label for="DoB"></label>
+                <input type="date" id="DoB"></input>
+            </th>
+            <th></th>
+            <th>
+                <label for="firstName"></label>
+                <input type="text" id="firstName" name="firstName" th:value="${firstName}">
+            </th>
+            <th></th>
+            <th></th>
+            <th>
+                <label for="gender"></label>
+                <select id="gender">
+                    <option th:value="FEMALE">female</option>
+                    <option th:value="MALE">male</option>
+                </select>
+            </th>
+            <th></th>
+            <button type="submit">Next</button>
+        </form>
     </tr>
     <tr th:each="volunteer, i: ${volunteers}">
         <!--        <td th:utext="${volunteer.id}"></td>-->
+        <td></td>
         <td th:utext="${volunteer.doB}"></td>
         <td th:utext="${volunteer.email}"></td>
         <td th:utext="${volunteer.firstName}"></td>
