@@ -55,10 +55,10 @@ public class VolunteerServiceImplementation implements VolunteerService, UserDet
         return volunteerRepository.findById(id).orElse(new Volunteer());
     }
 
-    @Override
-    public List<Volunteer> findByFirstName(String firstName) {
-        return volunteerRepository.findByFirstName(firstName);
-    }
+//    @Override
+//    public List<Volunteer> findByFirstName(String firstName) {
+//        return volunteerRepository.findByFirstName(firstName);
+//    }
 
     //    public Page<Volunteer> findFlatsByCriteria(FlatSearchDto form, Pageable pageable) {
 //

@@ -15,6 +15,6 @@ public interface VolunteerService {
 
     Volunteer getVolunteerByID(int id);
 
-    List<Volunteer> findByFirstName(String firstName);
+//    List<Volunteer> findByFirstName(String firstName);
 
 }

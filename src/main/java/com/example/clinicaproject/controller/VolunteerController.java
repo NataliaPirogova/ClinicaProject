@@ -91,14 +91,8 @@ public class VolunteerController {
     }
 
     @GetMapping("/volunteersAll")
-    public ModelAndView volunteersAll(@RequestParam(value = "firstName", required = false) String firstName,
-                                      ModelAndView modelAndView) {
+    public ModelAndView volunteersAll(ModelAndView modelAndView) {
         List<Volunteer> volunteers = volunteerService.allVolunteers();
-        modelAndView.addObject("firstName", firstName);
-        if (firstName != null) {
-            volunteers.stream()
-                    .filter(s -> s.getFirstName().equals(firstName)).collect(Collectors.toList());
-        }
         modelAndView.addObject("volunteers", volunteers);
         modelAndView.setViewName("volunteersAll");
         return modelAndView;
@@ -106,42 +100,41 @@ public class VolunteerController {
 
     @PostMapping("/volunteersAll")
     public ModelAndView volunteersAll1(@RequestParam(value = "firstName", required = false) String firstName,
+                                       @RequestParam(value = "middleName", required = false) String middleName,
                                        ModelAndView modelAndView, RedirectAttributes ra) {
-//        List<Volunteer> volunteers = volunteerService.allVolunteers();
-//        modelAndView.addObject("volunteers", volunteers);
+        List<Volunteer> volunteers = volunteerService.allVolunteers();
+        modelAndView.addObject("volunteers", volunteers);
         ra.addAttribute("firstName", firstName);
-        modelAndView.setViewName("redirect:/volunteersAllF");
+        ra.addAttribute("middleName", middleName);
+//        ra.addAttribute("DoB", DoB);
+        modelAndView.setViewName("redirect:/volunteersAllFiltered");
         return modelAndView;
     }
 
-    @GetMapping("/volunteersAllF")
+    @GetMapping("/volunteersAllFiltered")
     public ModelAndView volunteersAll2(@RequestParam(value = "firstName", required = false) String firstName,
-                                      ModelAndView modelAndView) {
+                                       @RequestParam(value = "middleName", required = false) String middleName,
+                                       ModelAndView modelAndView) {
         List<Volunteer> volunteers = volunteerService.allVolunteers();
+        //        modelAndView.addObject("DoB", DoB);
         modelAndView.addObject("firstName", firstName);
+        modelAndView.addObject("middleName", middleName);
+//        if (DoB != null) {
+//            volunteers = volunteers.stream().filter(v -> v.getDoB().equals(DoB)).collect(Collectors.toList());
+//        }
         if (firstName != null) {
-            volunteers.stream()
-                    .filter(s -> s.getFirstName().equals(firstName)).collect(Collectors.toList());
+            volunteers = volunteers.stream()
+                    .filter(v -> v.getFirstName().equals(firstName)).collect(Collectors.toList());
+        }
+//
+        if (middleName != null) {
+            volunteers = volunteers.stream()
+                    .filter(v -> v.getMiddleName().equals(middleName)).collect(Collectors.toList());
         }
         modelAndView.addObject("volunteers", volunteers);
         modelAndView.setViewName("volunteersAll");
         return modelAndView;
     }
-//
-//    @GetMapping("/volunteersAll/{firstName}")
-//    public ModelAndView volunteersAllF(ModelAndView modelAndView, @RequestParam(value = "firstName") String firstName) {
-//        List<Volunteer> volunteers = volunteerService.findByFirstName(firstName);
-//        modelAndView.addObject("volunteers", volunteers);
-//        modelAndView.setViewName("volunteersAll");
-//        return modelAndView;
-//    }
-
-//    public ModelAndView showByType(ModelAndView modelAndView, @PathVariable int type){
-//        List<Animal> listOfPets = animalService.findByType(type);
-//        modelAndView.addObject("listOfPets", listOfPets);
-//        modelAndView.setViewName("allpets");
-//        return modelAndView;
-//    }
 
     @GetMapping("/volunteersAllByPrimaryHealthInfo")
     public ModelAndView volunteersAllByPrimaryHealthInfo(ModelAndView modelAndView) {

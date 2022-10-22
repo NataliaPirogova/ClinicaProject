@@ -24,14 +24,17 @@
             <th></th>
             <th>
                 <label for="DoB"></label>
-                <input type="date" id="DoB"></input>
+                <input type="date" id="DoB" name="DoB" th:value="${DoB}">
             </th>
             <th></th>
             <th>
                 <label for="firstName"></label>
                 <input type="text" id="firstName" name="firstName" th:value="${firstName}">
             </th>
-            <th></th>
+            <th>
+                <label for="middleName"></label>
+                <input type="text" id="middleName" name="middleName" th:value="${middleName}">
+            </th>
             <th></th>
             <th>
                 <label for="gender"></label>
