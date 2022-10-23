@@ -16,28 +16,84 @@
         <th>Take hormonal contraceptives</th>
         <th>Sport</th>
         <th>Alcohol</th>
-        <th>Volunteer's id</th>
+<!--        <th>Volunteer's id</th>-->
     </tr>
     <tr>
-        <form th:action="@{/volunteersAllByHabitsInfo}" th:method="post" th:object="${newVolunteerHabitsInfo}">
-            <!--            <th><input type="text" name="keyword" id="keyword" size="50" th:value="${}"/>-->
-            <!--            </th>-->
+        <form th:action="@{/volunteersAllByHabitsInfo}" th:method="post">
             <th>
                 <label for="smoking"></label>
-                <select id="smoking" th:field="*{smoking}">
+                <select id="smoking" name="smoking">
                     <option th:value="NO">no</option>
                     <option th:value="SMOKE_EARLIER">SMOKE_EARLIER</option>
                     <option th:value="SMOKE_SEVERAL_TIMES_A_MONTH">SMOKE_SEVERAL_TIMES_A_MONTH</option>
                     <option th:value="SMOKE_1_TIME_A_WEEK_OR_MORE_OFTEN">SMOKE_1_TIME_A_WEEK_OR_MORE_OFTEN</option>
                 </select>
             </th>
-            <th></th>
+            <th>
+                <label for="takingDrugs"></label>
+                <select id="takingDrugs" name="takingDrugs">
+                    <option th:value="NO">no</option>
+                    <option th:value="NOT_NOW_BUT_EARLIER">NOT_NOW_BUT_EARLIER</option>
+                    <option th:value="YES">yes</option>
+                </select>
+            </th>
+            <th>
+                <label for="takingMedicines"></label>
+                <select id="takingMedicines" name="takingMedicines">
+                    <option th:value="false">no</option>
+                    <option th:value="true">yes</option>
+                </select>
+            </th>
+            <th>
+                <label for="pregnantNow"></label>
+                <select id="pregnantNow" name="pregnantNow">
+                    <option th:value="false">no</option>
+                    <option th:value="true">yes</option>
+                </select>
+            </th>
+            <th>
+                <label for="isPlanningPregnancy"></label>
+                <select id="isPlanningPregnancy" name="isPlanningPregnancy">
+                    <option th:value=" PLANNING_THIS_YEAR">PLANNING_THIS_YEAR</option>
+                    <option th:value="PLANNING_A_YEAR_AFTER_OR_LATER">PLANNING_A_YEAR_AFTER_OR_LATER</option>
+                    <option th:value="NOT_PLANNING">NOT_PLANNING</option>
+                </select>
+            </th>
+            <th>
+                <label for="vegetarian"></label>
+                <select id="vegetarian" name="vegetarian">
+                    <option th:value="false">no</option>
+                    <option th:value="true">yes</option>
+                </select>
+            </th>
+            <th>
+                <label for="takingHormonalContraceptives"></label>
+                <select id="takingHormonalContraceptives" name="takingHormonalContraceptives">
+                    <option th:value="false">no</option>
+                    <option th:value="true">yes</option>
+                </select>
+            </th>
+            <th>
+                <label for="sport"></label>
+                <select id="sport" name="sport">
+                    <option th:value="NO">NO</option>
+                    <option th:value="PROFESSIONAL">PROFESSIONAL</option>
+                    <option th:value="AMATEUR_SPORTS">AMATEUR_SPORTS</option>
+                </select>
+            </th>
+            <th>
+                <label for="alcohol"></label>
+                <select id="alcohol" name="alcohol">
+                    <option th:value="NO">NO</option>
+                    <option th:value="EVERY_DAY">EVERY_DAY</option>
+                    <option th:value="ONLY_ON_HOLIDAYS">ONLY_ON_HOLIDAYS</option>
+                    <option th:value="ONE_OR_TWO_TIMES_A_WEEK">ONE_OR_TWO_TIMES_A_WEEK</option>
+                </select>
+            </th>
             <th><input type="submit" value="Search"/></th>
         </form>
-
     </tr>
-    <tr th:each="volunteerHabitsInfo, i : ${volunteerHabitsInfos}">
-        <td th:utext="${volunteerHabitsInfo.id}"></td>
+    <tr th:each="volunteerHabitsInfo, i : ${volunteersAllByHabitsInfo}">
         <td th:utext="${volunteerHabitsInfo.smoking}"></td>
         <td th:utext="${volunteerHabitsInfo.takingDrugs}"></td>
         <td th:utext="${volunteerHabitsInfo.takingMedicines}"></td>
@@ -47,7 +103,7 @@
         <td th:utext="${volunteerHabitsInfo.takingHormonalContraceptives}"></td>
         <td th:utext="${volunteerHabitsInfo.sport}"></td>
         <td th:utext="${volunteerHabitsInfo.alcohol}"></td>
-        <td th:utext="${volunteerHabitsInfo.volunteer.id}"></td>
+<!--        <td th:utext="${volunteerHabitsInfo.volunteer_id}"></td>-->
     </tr>
 </table>
 
