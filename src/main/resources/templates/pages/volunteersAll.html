@@ -35,7 +35,10 @@
                 <label for="middleName"></label>
                 <input type="text" id="middleName" name="middleName" th:value="${middleName}">
             </th>
-            <th></th>
+            <th>
+                <label for="lastName"></label>
+                <input type="text" id="lastName" name="lastName" th:value="${lastName}">
+            </th>
             <th>
                 <label for="gender"></label>
                 <select id="gender">
@@ -43,7 +46,10 @@
                     <option th:value="MALE">male</option>
                 </select>
             </th>
-            <th></th>
+            <th>
+                <label for="phoneNumber"></label>
+                <input type="text" id="phoneNumber" name="phoneNumber" th:value="${phoneNumber}">
+            </th>
             <button type="submit">Next</button>
         </form>
     </tr>

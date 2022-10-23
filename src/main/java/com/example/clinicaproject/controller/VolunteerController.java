@@ -101,11 +101,22 @@ public class VolunteerController {
     @PostMapping("/volunteersAll")
     public ModelAndView volunteersAll1(@RequestParam(value = "firstName", required = false) String firstName,
                                        @RequestParam(value = "middleName", required = false) String middleName,
+                                       @RequestParam(value = "lastName", required = false) String lastName,
+                                       @RequestParam(value = "phoneNumber", required = false) String phoneNumber,
                                        ModelAndView modelAndView, RedirectAttributes ra) {
-        List<Volunteer> volunteers = volunteerService.allVolunteers();
-        modelAndView.addObject("volunteers", volunteers);
-        ra.addAttribute("firstName", firstName);
-        ra.addAttribute("middleName", middleName);
+//        List<Volunteer> volunteers = volunteerService.allVolunteers();
+//        modelAndView.addObject("volunteers", volunteers);
+        ra.addAttribute("firstName", firstName)
+                .addAttribute("middleName", middleName)
+                .addAttribute("lastName", lastName)
+                .addAttribute("phoneNumber", phoneNumber);
+//        ra.addAttribute("middleName", middleName);
+//        ra.addAttribute("lastName", lastName);
+//        ra.addAttribute("phoneNumber", phoneNumber);
+//        if (firstName!=null) {ra.addAttribute("firstName", firstName);}
+//        if (middleName!=null) {ra.addAttribute("middleName", middleName);}
+//        if (lastName!=null) {ra.addAttribute("lastName", lastName);}
+//        if (phoneNumber!=null) {ra.addAttribute("phoneNumber", phoneNumber);}
 //        ra.addAttribute("DoB", DoB);
         modelAndView.setViewName("redirect:/volunteersAllFiltered");
         return modelAndView;
@@ -114,22 +125,35 @@ public class VolunteerController {
     @GetMapping("/volunteersAllFiltered")
     public ModelAndView volunteersAll2(@RequestParam(value = "firstName", required = false) String firstName,
                                        @RequestParam(value = "middleName", required = false) String middleName,
+                                       @RequestParam(value = "lastName", required = false) String lastName,
+                                       @RequestParam(value = "phoneNumber", required = false) String phoneNumber,
                                        ModelAndView modelAndView) {
         List<Volunteer> volunteers = volunteerService.allVolunteers();
         //        modelAndView.addObject("DoB", DoB);
-        modelAndView.addObject("firstName", firstName);
-        modelAndView.addObject("middleName", middleName);
+//        if (firstName != null) {
+//            modelAndView.addObject("firstName", firstName);
+//        }
+//        modelAndView.addObject("middleName", middleName);
+//        modelAndView.addObject("lastName", lastName);
+//        modelAndView.addObject("phoneNumber", phoneNumber);
 //        if (DoB != null) {
 //            volunteers = volunteers.stream().filter(v -> v.getDoB().equals(DoB)).collect(Collectors.toList());
 //        }
-        if (firstName != null) {
+        if (firstName.length() != 0) {
             volunteers = volunteers.stream()
                     .filter(v -> v.getFirstName().equals(firstName)).collect(Collectors.toList());
         }
-//
-        if (middleName != null) {
+        if (middleName.length()!=0) {
             volunteers = volunteers.stream()
                     .filter(v -> v.getMiddleName().equals(middleName)).collect(Collectors.toList());
+        }
+        if (lastName.length() != 0) {
+            volunteers = volunteers.stream()
+                    .filter(v -> v.getLastName().equals(lastName)).collect(Collectors.toList());
+        }
+        if (phoneNumber.length()!=0) {
+            volunteers = volunteers.stream()
+                    .filter(v -> (v.getPhoneNumber() == Long.valueOf(phoneNumber))).collect(Collectors.toList());
         }
         modelAndView.addObject("volunteers", volunteers);
         modelAndView.setViewName("volunteersAll");
