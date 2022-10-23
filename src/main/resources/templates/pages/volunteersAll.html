@@ -9,7 +9,6 @@
 
 <table>
     <tr>
-        <!--        <th>Id volunteer</th>-->
         <th>Date of Birth</th>
         <th>Age</th>
         <th>email</th>
@@ -21,12 +20,15 @@
     </tr>
     <tr>
         <form th:action="@{/volunteersAll}" method="post">
-            <th></th>
             <th>
                 <label for="DoB"></label>
                 <input type="date" id="DoB" name="DoB" th:value="${DoB}">
             </th>
             <th></th>
+            <th>
+                <label for="email"></label>
+                <input type="text" id="email" name="email" th:value="${email}">
+            </th>
             <th>
                 <label for="firstName"></label>
                 <input type="text" id="firstName" name="firstName" th:value="${firstName}">
@@ -41,22 +43,21 @@
             </th>
             <th>
                 <label for="gender"></label>
-                <select id="gender">
+                <select id="gender" name="gender">
                     <option th:value="FEMALE">female</option>
                     <option th:value="MALE">male</option>
                 </select>
             </th>
             <th>
                 <label for="phoneNumber"></label>
-                <input type="text" id="phoneNumber" name="phoneNumber" th:value="${phoneNumber}">
+                <input type="number" id="phoneNumber" name="phoneNumber" th:value="${phoneNumber}">
             </th>
             <button type="submit">Next</button>
         </form>
     </tr>
     <tr th:each="volunteer, i: ${volunteers}">
-        <!--        <td th:utext="${volunteer.id}"></td>-->
-        <td></td>
         <td th:utext="${volunteer.doB}"></td>
+        <td></td>
         <td th:utext="${volunteer.email}"></td>
         <td th:utext="${volunteer.firstName}"></td>
         <td th:utext="${volunteer.middleName}"></td>

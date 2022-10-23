@@ -14,7 +14,4 @@ public interface VolunteerService {
     void deleteVolunteer(Volunteer volunteer);
 
     Volunteer getVolunteerByID(int id);
-
-//    List<Volunteer> findByFirstName(String firstName);
-
 }

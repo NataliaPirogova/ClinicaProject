@@ -5,7 +5,6 @@ import com.example.clinicaproject.model.Volunteer;
 import com.example.clinicaproject.repository.VolunteerRepository;
 import com.example.clinicaproject.service.VolunteerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -54,28 +53,6 @@ public class VolunteerServiceImplementation implements VolunteerService, UserDet
     public Volunteer getVolunteerByID(int id) {
         return volunteerRepository.findById(id).orElse(new Volunteer());
     }
-
-//    @Override
-//    public List<Volunteer> findByFirstName(String firstName) {
-//        return volunteerRepository.findByFirstName(firstName);
-//    }
-
-    //    public Page<Volunteer> findFlatsByCriteria(FlatSearchDto form, Pageable pageable) {
-//
-//        Specification<Volunteer> specification = null;
-//
-//        where(specification).and(
-//                (root, criteriaQuery, criteriaBuilder) ->
-//                        criteriaBuilder.equal(root.get("available"), form.isAvailable())
-//        );
-//
-//        where(specification).and(
-//                (root, criteriaQuery, criteriaBuilder) ->
-//                        criteriaBuilder.equal(root.get("reserved"), form.isReserved)
-//        );
-//
-//        Page<Volunteer> flats = volunteerRepository.findAll(specification, pageable);
-//    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

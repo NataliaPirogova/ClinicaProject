@@ -1,7 +1,6 @@
 package com.example.clinicaproject.service.impl;
 
 import com.example.clinicaproject.model.VolunteerHabitsInfo;
-import com.example.clinicaproject.model.enums.Smoking;
 import com.example.clinicaproject.repository.VolunteerHabitsInfoRepository;
 import com.example.clinicaproject.service.VolunteerHabitsInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,18 +39,4 @@ public class VolunteerHabitsInfoServiceImplementation implements VolunteerHabits
     public List<VolunteerHabitsInfo> allVolunteerHabitsInfo() {
         return volunteerHabitsInfoRepository.findAll();
     }
-
-    @Override
-    public List<VolunteerHabitsInfo> findAllBySmoking(Smoking smoking) {
-        return volunteerHabitsInfoRepository.findAllBySmoking(smoking);
-    }
-
-//
-//    @Override
-//    @Query("SELECT v FROM VolunteerHabitsInfo v WHERE v.smoking = :smok")
-//    public List<VolunteerHabitsInfo> filterBySmoking(@Param("smok") Smoking smok) {
-//        return volunteerHabitsInfoRepository.findAll();
-//    }
-
-
 }

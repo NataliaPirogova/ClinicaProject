@@ -3,6 +3,7 @@ package com.example.clinicaproject.controller;
 import com.example.clinicaproject.model.Volunteer;
 import com.example.clinicaproject.model.VolunteerHabitsInfo;
 import com.example.clinicaproject.model.VolunteerPrimaryHealthInfo;
+import com.example.clinicaproject.model.enums.Gender;
 import com.example.clinicaproject.model.enums.Smoking;
 import com.example.clinicaproject.service.VolunteerHabitsInfoService;
 import com.example.clinicaproject.service.VolunteerPrimaryHealthInfoService;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -99,51 +101,48 @@ public class VolunteerController {
     }
 
     @PostMapping("/volunteersAll")
-    public ModelAndView volunteersAll1(@RequestParam(value = "firstName", required = false) String firstName,
+    public ModelAndView volunteersAll1(@RequestParam(value = "DoB", required = false) String DoB,
+            @RequestParam(value = "email", required = false) String email,
+                                       @RequestParam(value = "firstName", required = false) String firstName,
                                        @RequestParam(value = "middleName", required = false) String middleName,
                                        @RequestParam(value = "lastName", required = false) String lastName,
                                        @RequestParam(value = "phoneNumber", required = false) String phoneNumber,
+                                       @RequestParam(value = "gender", required = false) String gender,
                                        ModelAndView modelAndView, RedirectAttributes ra) {
-//        List<Volunteer> volunteers = volunteerService.allVolunteers();
-//        modelAndView.addObject("volunteers", volunteers);
-        ra.addAttribute("firstName", firstName)
+        ra.addAttribute("DoB", DoB)
+                .addAttribute("email", email)
+                .addAttribute("firstName", firstName)
                 .addAttribute("middleName", middleName)
                 .addAttribute("lastName", lastName)
-                .addAttribute("phoneNumber", phoneNumber);
-//        ra.addAttribute("middleName", middleName);
-//        ra.addAttribute("lastName", lastName);
-//        ra.addAttribute("phoneNumber", phoneNumber);
-//        if (firstName!=null) {ra.addAttribute("firstName", firstName);}
-//        if (middleName!=null) {ra.addAttribute("middleName", middleName);}
-//        if (lastName!=null) {ra.addAttribute("lastName", lastName);}
-//        if (phoneNumber!=null) {ra.addAttribute("phoneNumber", phoneNumber);}
-//        ra.addAttribute("DoB", DoB);
+                .addAttribute("phoneNumber", phoneNumber)
+                .addAttribute("gender", gender);
         modelAndView.setViewName("redirect:/volunteersAllFiltered");
         return modelAndView;
     }
 
     @GetMapping("/volunteersAllFiltered")
-    public ModelAndView volunteersAll2(@RequestParam(value = "firstName", required = false) String firstName,
+    public ModelAndView volunteersAll2(@RequestParam(value = "DoB", required = false) String DoB,
+                                       @RequestParam(value = "email", required = false) String email,
+                                       @RequestParam(value = "firstName", required = false) String firstName,
                                        @RequestParam(value = "middleName", required = false) String middleName,
                                        @RequestParam(value = "lastName", required = false) String lastName,
                                        @RequestParam(value = "phoneNumber", required = false) String phoneNumber,
+                                       @RequestParam(value = "gender", required = false) String gender,
                                        ModelAndView modelAndView) {
         List<Volunteer> volunteers = volunteerService.allVolunteers();
-        //        modelAndView.addObject("DoB", DoB);
-//        if (firstName != null) {
-//            modelAndView.addObject("firstName", firstName);
-//        }
-//        modelAndView.addObject("middleName", middleName);
-//        modelAndView.addObject("lastName", lastName);
-//        modelAndView.addObject("phoneNumber", phoneNumber);
-//        if (DoB != null) {
-//            volunteers = volunteers.stream().filter(v -> v.getDoB().equals(DoB)).collect(Collectors.toList());
-//        }
+        if (DoB.length() != 0) {
+            volunteers = volunteers.stream()
+                    .filter(v -> v.getDoB().equals(LocalDate.parse(DoB))).collect(Collectors.toList());
+        }
+        if (email.length() != 0) {
+            volunteers = volunteers.stream()
+                    .filter(v -> v.getEmail().equals(email)).collect(Collectors.toList());
+        }
         if (firstName.length() != 0) {
             volunteers = volunteers.stream()
                     .filter(v -> v.getFirstName().equals(firstName)).collect(Collectors.toList());
         }
-        if (middleName.length()!=0) {
+        if (middleName.length() != 0) {
             volunteers = volunteers.stream()
                     .filter(v -> v.getMiddleName().equals(middleName)).collect(Collectors.toList());
         }
@@ -151,9 +150,16 @@ public class VolunteerController {
             volunteers = volunteers.stream()
                     .filter(v -> v.getLastName().equals(lastName)).collect(Collectors.toList());
         }
-        if (phoneNumber.length()!=0) {
+        if (phoneNumber.length() != 0) {
             volunteers = volunteers.stream()
                     .filter(v -> (v.getPhoneNumber() == Long.valueOf(phoneNumber))).collect(Collectors.toList());
+        }
+        if (Gender.valueOf(gender) == Gender.FEMALE) {
+            volunteers = volunteers.stream()
+                    .filter(v -> v.getGender().equals(Gender.FEMALE)).collect(Collectors.toList());
+        } else if (Gender.valueOf(gender) == Gender.MALE) {
+            volunteers = volunteers.stream()
+                    .filter(v -> v.getGender().equals(Gender.MALE)).collect(Collectors.toList());
         }
         modelAndView.addObject("volunteers", volunteers);
         modelAndView.setViewName("volunteersAll");

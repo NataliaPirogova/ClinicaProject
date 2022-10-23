@@ -7,7 +7,6 @@
 <body>
 <table>
     <tr>
-        <th>Id</th>
         <th>Smoking</th>
         <th>Take drugs</th>
         <th>Take medicines</th>
@@ -21,8 +20,8 @@
     </tr>
     <tr>
         <form th:action="@{/volunteersAllByHabitsInfo}" th:method="post" th:object="${newVolunteerHabitsInfo}">
-<!--            <th><input type="text" name="keyword" id="keyword" size="50" th:value="${}"/>-->
-<!--            </th>-->
+            <!--            <th><input type="text" name="keyword" id="keyword" size="50" th:value="${}"/>-->
+            <!--            </th>-->
             <th>
                 <label for="smoking"></label>
                 <select id="smoking" th:field="*{smoking}">
