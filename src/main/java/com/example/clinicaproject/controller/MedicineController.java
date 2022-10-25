@@ -2,15 +2,13 @@ package com.example.clinicaproject.controller;
 
 import com.example.clinicaproject.model.Medicine;
 import com.example.clinicaproject.model.MedicineManufacturer;
+import com.example.clinicaproject.model.Volunteer;
 import com.example.clinicaproject.service.MedicineManufacturerService;
 import com.example.clinicaproject.service.MedicineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -40,9 +38,7 @@ public class MedicineController {
     }
 
     @GetMapping(value = "/add")
-    public ModelAndView registrationMedicinePage() {
-        //можно выносить в VC config ????
-        ModelAndView modelAndView = new ModelAndView();
+    public ModelAndView registrationMedicinePage(ModelAndView modelAndView) {
         List<MedicineManufacturer> manufacturers = medicineManufacturerService.allMedicineManufacturers();
         modelAndView.addObject("manufacturers", manufacturers);
         modelAndView.setViewName("registrationMedicine");
@@ -50,9 +46,10 @@ public class MedicineController {
     }
 
     @PostMapping(value = "/add")
-    public ModelAndView registrationMedicine(@ModelAttribute("medicine") Medicine medicine) {
-        ModelAndView modelAndView = new ModelAndView();
-        MedicineManufacturer manufacturer = (MedicineManufacturer) httpSession.getAttribute("newManufacturer");
+    public ModelAndView registrationMedicine(@RequestParam(value = "nameManufacturer") String nameManufacturer,
+                                             @ModelAttribute("medicine") Medicine medicine, ModelAndView modelAndView) {
+//        MedicineManufacturer manufacturer = (MedicineManufacturer) httpSession.getAttribute("newManufacturer");
+        MedicineManufacturer manufacturer = medicineManufacturerService.findByName(nameManufacturer);
         medicine.setManufacturer(manufacturer);
         medicineService.add(medicine);
         modelAndView.setViewName("redirect:/");
@@ -72,6 +69,29 @@ public class MedicineController {
         MedicineManufacturer newManufacturer = medicineManufacturerService.add(manufacturer);
         httpSession.setAttribute("newManufacturer", newManufacturer);
         modelAndView.setViewName("redirect:/medicine/add");
+        return modelAndView;
+    }
+
+    @GetMapping(value = "test/{id}")
+    public ModelAndView infoTestMedicine(ModelAndView modelAndView,
+                                         @PathVariable(value = "id") int id) {
+        Medicine medicineById = medicineService.getMedicineById(id);
+        List<Volunteer> volunteersMedicineById = medicineById.getVolunteer();
+        modelAndView.addObject("medicineById", medicineById);
+        modelAndView.addObject("volunteersMedicineById", volunteersMedicineById);
+        httpSession.setAttribute("medicineId", id);
+        modelAndView.setViewName("medicine");
+        return modelAndView;
+    }
+
+    @PostMapping(value = "test/{id}")
+    public ModelAndView editTestMedicine(ModelAndView modelAndView,
+                                         @PathVariable(value = "id") int id) {
+        Medicine medicineById = medicineService.getMedicineById(id);
+        List<Volunteer> volunteersForMedicineResearch =
+                (List<Volunteer>) httpSession.getAttribute("volunteersForMedicineResearch");
+        medicineById.setVolunteer(volunteersForMedicineResearch);
+        modelAndView.setViewName("medicine");
         return modelAndView;
     }
 

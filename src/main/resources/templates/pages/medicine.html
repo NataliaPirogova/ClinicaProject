@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Medicine</title>
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<p>About this medicine</p>
+
+<table>
+    <tr>
+        <th>Name of medicine</th>
+        <th>Name of manufacturer</th>
+        <th>City of manufacturer</th>
+        <th>Country of manufacturer</th>
+    </tr>
+    <tr>
+        <td th:utext="${medicineById.medicineName}"></td>
+        <td th:utext="${medicineById.getManufacturer().name}"></td>
+        <td th:utext="${medicineById.getManufacturer().city}"></td>
+        <td th:utext="${medicineById.getManufacturer().countryOfOrigin}"></td>
+        <td>
+            <ul th:each="volunteer, i : ${medicineById.getVolunteer()}">
+                <li th:text="${i.index}+' '+${medicineById.getVolunteer().firstName}"></li>
+            </ul>
+        </td>
+        <td th:utext="${medicineById.getVolunteer().size()} + ' ' + volunteers"></td>
+    </tr>
+</table>
+<br>
+
+<a th:href="@{~/clinicalResearch/volunteersAllByHabitsInfo}">Find new volunteers for research of this medicine</a>
+
+</body>
+</html>

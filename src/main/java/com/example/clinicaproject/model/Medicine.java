@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -19,5 +20,8 @@ public class Medicine {
     @ManyToOne
     @JoinColumn(name = "manufacturers_id")
     private MedicineManufacturer manufacturer;
+    @OneToMany
+    @JoinColumn(name = "volunteer_id")
+    private List<Volunteer> volunteer;
 
 }

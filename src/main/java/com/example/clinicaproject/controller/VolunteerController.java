@@ -1,9 +1,11 @@
 package com.example.clinicaproject.controller;
 
+import com.example.clinicaproject.model.Medicine;
 import com.example.clinicaproject.model.Volunteer;
 import com.example.clinicaproject.model.VolunteerHabitsInfo;
 import com.example.clinicaproject.model.VolunteerPrimaryHealthInfo;
 import com.example.clinicaproject.model.enums.*;
+import com.example.clinicaproject.service.MedicineService;
 import com.example.clinicaproject.service.VolunteerHabitsInfoService;
 import com.example.clinicaproject.service.VolunteerPrimaryHealthInfoService;
 import com.example.clinicaproject.service.VolunteerService;
@@ -29,15 +31,17 @@ public class VolunteerController {
     private final VolunteerHabitsInfoService volunteerHabitsInfoService;
     private final VolunteerPrimaryHealthInfoService volunteerPrimaryHealthInfoService;
     private final HttpSession httpSession;
+    private final MedicineService medicineService;
 
     @Autowired
     public VolunteerController(VolunteerService volunteerService,
                                VolunteerHabitsInfoService volunteerHabitsInfoService,
-                               VolunteerPrimaryHealthInfoService volunteerPrimaryHealthInfoService, HttpSession httpSession) {
+                               VolunteerPrimaryHealthInfoService volunteerPrimaryHealthInfoService, HttpSession httpSession, MedicineService medicineService) {
         this.volunteerService = volunteerService;
         this.volunteerHabitsInfoService = volunteerHabitsInfoService;
         this.volunteerPrimaryHealthInfoService = volunteerPrimaryHealthInfoService;
         this.httpSession = httpSession;
+        this.medicineService = medicineService;
     }
 
 
@@ -162,6 +166,8 @@ public class VolunteerController {
                     .filter(v -> v.getGender().equals(Gender.MALE)).collect(Collectors.toList());
         }
         modelAndView.addObject("volunteers", volunteers);
+        httpSession.setAttribute("volunteersForMedicineResearch", volunteers);
+        int id = (int) httpSession.getAttribute("id");
         modelAndView.setViewName("volunteersAll");
         return modelAndView;
     }
