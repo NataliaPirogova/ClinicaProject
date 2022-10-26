@@ -11,9 +11,11 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Data
 @Entity
+@Table(name = "volunteer_habits_info")
 public class VolunteerHabitsInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
     @Enumerated(EnumType.STRING)
     private Smoking smoking;
@@ -29,6 +31,6 @@ public class VolunteerHabitsInfo {
     private Sport sport;
     @Enumerated(EnumType.STRING)
     private Alcohol alcohol;
-    @OneToOne(mappedBy = "volunteerHabitsInfo")
+    @OneToOne
     private Volunteer volunteer;
 }

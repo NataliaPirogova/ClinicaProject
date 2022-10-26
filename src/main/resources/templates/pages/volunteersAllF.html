@@ -19,7 +19,7 @@
         <th>Phone</th>
     </tr>
     <tr>
-        <form th:action="@{/volunteersAll}" method="post">
+        <form th:action="@{/volunteersAllFiltered}" method="post">
 <!--            <th>-->
 <!--                <label for="DoB"></label>-->
 <!--                <input type="date" id="DoB" name="DoB" th:value="${DoB}">-->
@@ -67,7 +67,6 @@
     </tr>
 </table>
 
-<a th:href="@{~/clinicalResearch/medicine/test/{id}}">Return to medicine</a>
 <a th:href="@{~/clinicalResearch}">Home page</a>
 
 </body>

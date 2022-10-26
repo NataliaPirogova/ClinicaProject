@@ -1,6 +1,5 @@
 package com.example.clinicaproject.controller;
 
-import com.example.clinicaproject.model.Medicine;
 import com.example.clinicaproject.model.Volunteer;
 import com.example.clinicaproject.model.VolunteerHabitsInfo;
 import com.example.clinicaproject.model.VolunteerPrimaryHealthInfo;
@@ -104,7 +103,8 @@ public class VolunteerController {
     }
 
     @PostMapping("/volunteersAll")
-    public ModelAndView volunteersAll1(@RequestParam(value = "DoB", required = false) String DoB,
+    public ModelAndView volunteersAll1(
+//            @RequestParam(value = "DoB", required = false) String DoB,
                                        @RequestParam(value = "email", required = false) String email,
                                        @RequestParam(value = "firstName", required = false) String firstName,
                                        @RequestParam(value = "middleName", required = false) String middleName,
@@ -112,7 +112,8 @@ public class VolunteerController {
                                        @RequestParam(value = "phoneNumber", required = false) String phoneNumber,
                                        @RequestParam(value = "gender", required = false) String gender,
                                        ModelAndView modelAndView, RedirectAttributes ra) {
-        ra.addAttribute("DoB", DoB)
+        ra
+//                .addAttribute("DoB", DoB)
                 .addAttribute("email", email)
                 .addAttribute("firstName", firstName)
                 .addAttribute("middleName", middleName)
@@ -124,7 +125,8 @@ public class VolunteerController {
     }
 
     @GetMapping("/volunteersAllFiltered")
-    public ModelAndView volunteersAll2(@RequestParam(value = "DoB", required = false) String DoB,
+    public ModelAndView volunteersAll2(
+//            @RequestParam(value = "DoB", required = false) String DoB,
                                        @RequestParam(value = "email", required = false) String email,
                                        @RequestParam(value = "firstName", required = false) String firstName,
                                        @RequestParam(value = "middleName", required = false) String middleName,
@@ -133,12 +135,12 @@ public class VolunteerController {
                                        @RequestParam(value = "gender", required = false) String gender,
                                        ModelAndView modelAndView) {
         List<Volunteer> volunteers = volunteerService.allVolunteers();
-        modelAndView.addObject("volunteers", volunteers);
-        if (DoB.length() != 0) {
-            volunteers = volunteers.stream()
-                    .filter(v -> v.getDoB().equals(LocalDate.parse(DoB))).collect(Collectors.toList());
-        }
-        if (email.length() != 0) {
+//        modelAndView.addObject("volunteers", volunteers);
+//        if (DoB != null) {
+//            volunteers = volunteers.stream()
+//                    .filter(v -> v.getDoB().equals(LocalDate.parse(DoB))).collect(Collectors.toList());
+//        }
+        if (!email.isBlank()) {
             volunteers = volunteers.stream()
                     .filter(v -> v.getEmail().equals(email)).collect(Collectors.toList());
         }
@@ -167,11 +169,25 @@ public class VolunteerController {
         }
         modelAndView.addObject("volunteers", volunteers);
         httpSession.setAttribute("volunteersForMedicineResearch", volunteers);
-        int medicineId = (int) httpSession.getAttribute("medicineId");
-        medicineService.getMedicineById(medicineId).setVolunteer(volunteers);
-        modelAndView.setViewName("volunteersAll");
+        modelAndView.setViewName("volunteersAllF");
         return modelAndView;
     }
+
+    @PostMapping("/volunteersAllFiltered")
+    public ModelAndView volunteersAll2(ModelAndView modelAndView) {
+        List<Volunteer> volunteers = (List<Volunteer>) httpSession.getAttribute("volunteersForMedicineResearch");
+        if (httpSession.getAttribute("medicineId") != null) {
+            int medicineId = (int) httpSession.getAttribute("medicineId");
+            for (Volunteer volunteer :
+                    volunteers) {
+                volunteer.setMedicine(medicineService.getMedicineById(medicineId));
+                volunteerService.editVolunteer(volunteer);
+            }
+        }
+        modelAndView.setViewName("redirect:/");
+        return modelAndView;
+    }
+
 
     @GetMapping("/volunteersAllByPrimaryHealthInfo")
     public ModelAndView volunteersAllByPrimaryHealthInfo(ModelAndView modelAndView) {
@@ -213,7 +229,6 @@ public class VolunteerController {
                 .addAttribute("takingHormonalContraceptives", takingHormonalContraceptives)
                 .addAttribute("sport", sport)
                 .addAttribute("alcohol", alcohol);
-        int medicineId = (int) httpSession.getAttribute("medicineId");
         modelAndView.setViewName("redirect:/volunteersAllByHabitsInfoFiltered");
         return modelAndView;
     }
@@ -307,8 +322,8 @@ public class VolunteerController {
             case ONE_OR_TWO_TIMES_A_WEEK -> volunteersAllByHabitsInfo = volunteersAllByHabitsInfo.stream()
                     .filter(v -> v.getAlcohol().equals(Alcohol.ONE_OR_TWO_TIMES_A_WEEK)).collect(Collectors.toList());
         }
-                modelAndView.addObject("volunteersAllByHabitsInfo", volunteersAllByHabitsInfo);
-                modelAndView.setViewName("volunteersAllByHabitsInfo");
+        modelAndView.addObject("volunteersAllByHabitsInfo", volunteersAllByHabitsInfo);
+        modelAndView.setViewName("volunteersAllByHabitsInfo");
         return modelAndView;
     }
 

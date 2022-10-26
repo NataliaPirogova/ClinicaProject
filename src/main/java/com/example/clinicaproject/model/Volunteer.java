@@ -8,17 +8,16 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.Period;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
-
+@Table(name = "volunteer")
 public class Volunteer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
     private final Role role = Role.VOLUNTEER;
     private String firstName;//имя
@@ -32,13 +31,11 @@ public class Volunteer {
     private long phoneNumber;
     private String email;
     private String password;
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "volunteer_habits_info_id", referencedColumnName = "id")
+    @OneToOne(mappedBy = "volunteer")
     private VolunteerHabitsInfo volunteerHabitsInfo;
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "volunteer_primary_health_info_id", referencedColumnName = "id")
+    @OneToOne(mappedBy = "volunteer")
     private VolunteerPrimaryHealthInfo volunteerPrimaryHealthInfo;
-@ManyToOne
-@JoinColumn(name = "medicine_id", referencedColumnName = "id")
-    private Medicine medicine;
+    @ManyToOne
+    @JoinColumn(name = "medicine_id")
+    Medicine medicine;
 }

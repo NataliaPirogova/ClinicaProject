@@ -21,11 +21,6 @@
         <td th:utext="${medicineById.getManufacturer().name}"></td>
         <td th:utext="${medicineById.getManufacturer().city}"></td>
         <td th:utext="${medicineById.getManufacturer().countryOfOrigin}"></td>
-        <td>
-            <ul th:each="volunteer, i : ${medicineById.getVolunteer()}">
-                <li th:text="${i.index}+' '+${medicineById.getVolunteer().firstName}"></li>
-            </ul>
-        </td>
         <td th:utext="${medicineById.getVolunteer().size()} + ' ' + volunteers"></td>
     </tr>
 </table>
