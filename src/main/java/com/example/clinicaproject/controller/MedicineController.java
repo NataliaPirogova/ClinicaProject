@@ -72,22 +72,22 @@ public class MedicineController {
         return modelAndView;
     }
 
-    @GetMapping(value = "test/{id}")
+    @GetMapping(value = "test/{medicineId}")
     public ModelAndView infoTestMedicine(ModelAndView modelAndView,
-                                         @PathVariable(value = "id") int id) {
-        Medicine medicineById = medicineService.getMedicineById(id);
+                                         @PathVariable(value = "medicineId") int medicineId) {
+        Medicine medicineById = medicineService.getMedicineById(medicineId);
         List<Volunteer> volunteersMedicineById = medicineById.getVolunteer();
         modelAndView.addObject("medicineById", medicineById);
         modelAndView.addObject("volunteersMedicineById", volunteersMedicineById);
-        httpSession.setAttribute("medicineId", id);
+        httpSession.setAttribute("medicineId", medicineId);
         modelAndView.setViewName("medicine");
         return modelAndView;
     }
 
-    @PostMapping(value = "test/{id}")
+    @PostMapping(value = "test/{medicineId}")
     public ModelAndView editTestMedicine(ModelAndView modelAndView,
-                                         @PathVariable(value = "id") int id) {
-        Medicine medicineById = medicineService.getMedicineById(id);
+                                         @PathVariable(value = "medicineId") int medicineId) {
+        Medicine medicineById = medicineService.getMedicineById(medicineId);
         List<Volunteer> volunteersForMedicineResearch =
                 (List<Volunteer>) httpSession.getAttribute("volunteersForMedicineResearch");
         medicineById.setVolunteer(volunteersForMedicineResearch);

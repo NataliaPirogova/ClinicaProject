@@ -167,13 +167,15 @@ public class VolunteerController {
         }
         modelAndView.addObject("volunteers", volunteers);
         httpSession.setAttribute("volunteersForMedicineResearch", volunteers);
-        int id = (int) httpSession.getAttribute("id");
+        int medicineId = (int) httpSession.getAttribute("medicineId");
+        medicineService.getMedicineById(medicineId).setVolunteer(volunteers);
         modelAndView.setViewName("volunteersAll");
         return modelAndView;
     }
 
     @GetMapping("/volunteersAllByPrimaryHealthInfo")
     public ModelAndView volunteersAllByPrimaryHealthInfo(ModelAndView modelAndView) {
+
         List<VolunteerPrimaryHealthInfo> volunteerPrimaryHealthInfoList = volunteerPrimaryHealthInfoService.allVolunteerPrimaryHealthInfo();
         modelAndView.addObject("volunteerPrimaryHealthInfoAll", volunteerPrimaryHealthInfoList);
         modelAndView.setViewName("volunteersAllByPrimaryHealthInfo");
@@ -185,6 +187,7 @@ public class VolunteerController {
         List<VolunteerHabitsInfo> volunteersAllByHabitsInfo = volunteerHabitsInfoService.allVolunteerHabitsInfo();
         modelAndView.addObject("volunteersAllByHabitsInfo", volunteersAllByHabitsInfo);
         modelAndView.setViewName("volunteersAllByHabitsInfo");
+        int medicineId = (int) httpSession.getAttribute("medicineId");
         return modelAndView;
     }
 
@@ -210,6 +213,7 @@ public class VolunteerController {
                 .addAttribute("takingHormonalContraceptives", takingHormonalContraceptives)
                 .addAttribute("sport", sport)
                 .addAttribute("alcohol", alcohol);
+        int medicineId = (int) httpSession.getAttribute("medicineId");
         modelAndView.setViewName("redirect:/volunteersAllByHabitsInfoFiltered");
         return modelAndView;
     }
@@ -303,8 +307,8 @@ public class VolunteerController {
             case ONE_OR_TWO_TIMES_A_WEEK -> volunteersAllByHabitsInfo = volunteersAllByHabitsInfo.stream()
                     .filter(v -> v.getAlcohol().equals(Alcohol.ONE_OR_TWO_TIMES_A_WEEK)).collect(Collectors.toList());
         }
-        modelAndView.addObject("volunteersAllByHabitsInfo", volunteersAllByHabitsInfo);
-        modelAndView.setViewName("volunteersAllByHabitsInfo");
+                modelAndView.addObject("volunteersAllByHabitsInfo", volunteersAllByHabitsInfo);
+                modelAndView.setViewName("volunteersAllByHabitsInfo");
         return modelAndView;
     }
 

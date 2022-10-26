@@ -11,6 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Table(name = "medicine")
 public class Medicine {
 
     @Id
@@ -20,8 +21,7 @@ public class Medicine {
     @ManyToOne
     @JoinColumn(name = "manufacturers_id")
     private MedicineManufacturer manufacturer;
-    @OneToMany
-    @JoinColumn(name = "volunteer_id")
-    private List<Volunteer> volunteer;
+    @OneToMany(mappedBy = "medicine")
+    List<Volunteer> volunteer;
 
 }

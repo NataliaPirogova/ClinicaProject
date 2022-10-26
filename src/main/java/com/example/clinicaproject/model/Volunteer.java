@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -37,4 +38,7 @@ public class Volunteer {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "volunteer_primary_health_info_id", referencedColumnName = "id")
     private VolunteerPrimaryHealthInfo volunteerPrimaryHealthInfo;
+@ManyToOne
+@JoinColumn(name = "medicine_id", referencedColumnName = "id")
+    private Medicine medicine;
 }
