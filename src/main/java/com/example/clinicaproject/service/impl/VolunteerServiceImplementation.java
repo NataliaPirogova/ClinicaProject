@@ -55,6 +55,11 @@ public class VolunteerServiceImplementation implements VolunteerService, UserDet
     }
 
     @Override
+    public Volunteer findByEmail(String email) {
+        return volunteerRepository.findByEmail(email);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Volunteer volunteer = volunteerRepository.findByEmail(username);
         return User.withUsername(volunteer.getEmail())

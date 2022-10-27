@@ -9,6 +9,9 @@ import com.example.clinicaproject.service.VolunteerHabitsInfoService;
 import com.example.clinicaproject.service.VolunteerPrimaryHealthInfoService;
 import com.example.clinicaproject.service.VolunteerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +34,7 @@ public class VolunteerController {
     private final VolunteerPrimaryHealthInfoService volunteerPrimaryHealthInfoService;
     private final HttpSession httpSession;
     private final MedicineService medicineService;
+    private UserDetailsService userDetailsService;
 
     @Autowired
     public VolunteerController(VolunteerService volunteerService,
@@ -45,14 +49,14 @@ public class VolunteerController {
 
 
     @GetMapping(value = "/registerVolunteer")
-    public ModelAndView registerPageVolunteer() {
-        ModelAndView modelAndView = new ModelAndView();
+    public ModelAndView registerPageVolunteer(ModelAndView modelAndView, @AuthenticationPrincipal User user) {
+        System.out.println(user.getUsername());
         modelAndView.setViewName("registrationVolunteer");
         return modelAndView;
     }
 
     @PostMapping(value = "/registrationVolunteer")
-    public ModelAndView registerVolunteer(@ModelAttribute("volunteer") Volunteer volunteer) {
+    public ModelAndView registerVolunteer(@ModelAttribute("volunteer") Volunteer volunteer, @AuthenticationPrincipal User user) {
         ModelAndView modelAndView = new ModelAndView();
         Volunteer volunteer1 = volunteerService.addVolunteer(volunteer);
         httpSession.setAttribute("newVolunteer", volunteer1);

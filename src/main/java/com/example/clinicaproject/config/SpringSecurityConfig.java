@@ -37,7 +37,7 @@ public class SpringSecurityConfig {
         http.csrf().disable().
                 authorizeHttpRequests(
                         request -> request.antMatchers(
-                                        "/", "/*", "/*/*", "/*/*/*","/volunteersAllByHabitsInfo", "/registrationV", "/contacts", "/registerVolunteer").permitAll()
+                                        "/", "/registrationV", "/contacts").permitAll()
                                 .anyRequest().authenticated())
                 .formLogin(login -> login.loginPage("/login").usernameParameter("email").permitAll())
                 .logout(logout -> logout.permitAll().deleteCookies("JSESSIONID"));

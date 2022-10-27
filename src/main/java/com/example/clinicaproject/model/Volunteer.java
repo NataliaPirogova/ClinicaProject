@@ -8,18 +8,22 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "volunteer")
-public class Volunteer {
+@Table(name = "volunteer", uniqueConstraints={@UniqueConstraint(columnNames={"email"})})
+public class Volunteer{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-    private final Role role = Role.VOLUNTEER;
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "volunteer_role", joinColumns = @JoinColumn(name = "volunteer_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<Role> roles;
     private String firstName;//имя
     private String lastName;//фамилия
     private String middleName;//отчество
@@ -29,6 +33,7 @@ public class Volunteer {
     @Enumerated(EnumType.STRING)
     private Gender gender;//пол
     private long phoneNumber;
+    @Column(unique = true)
     private String email;
     private String password;
     @OneToOne(mappedBy = "volunteer")

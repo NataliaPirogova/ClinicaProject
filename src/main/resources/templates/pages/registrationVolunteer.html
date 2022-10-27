@@ -26,9 +26,9 @@
     <input th:type="text" id="phoneNumber" th:field="*{phoneNumber}"
            pattern="^(\+375|80)(29|25|44|33)(\d{3})(\d{2})(\d{2})$" required></label><br>
     <label for="email">Email
-    <input th:type="text" id="email" th:field="*{email}" required></label><br>
-    <label for="password">Password
-        <input th:type="password" id="password" th:field="*{password}" required></label><br>
+    <input th:type="text" id="email" th:value="*{user.getUsername()}" required></label><br>
+<!--    <label for="password">Password-->
+<!--        <input th:type="password" id="password" th:field="*{password}" required></label><br>-->
     <input type="submit">
 </form>
 <footer th:insert="blocks/header :: footer"></footer>
