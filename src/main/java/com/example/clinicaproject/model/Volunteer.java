@@ -35,7 +35,7 @@ public class Volunteer{
     private long phoneNumber;
     @Column(unique = true)
     private String email;
-    private String password;
+//    private String password;
     @OneToOne(mappedBy = "volunteer")
     private VolunteerHabitsInfo volunteerHabitsInfo;
     @OneToOne(mappedBy = "volunteer")

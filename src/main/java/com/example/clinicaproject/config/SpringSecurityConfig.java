@@ -39,7 +39,7 @@ public class SpringSecurityConfig {
                         request -> request.antMatchers(
                                         "/", "/registrationV", "/contacts").permitAll()
                                 .anyRequest().authenticated())
-                .formLogin(login -> login.loginPage("/login").usernameParameter("email").permitAll())
+                .formLogin(login -> login.loginPage("/login").permitAll())
                 .logout(logout -> logout.permitAll().deleteCookies("JSESSIONID"));
 
         return http.build();

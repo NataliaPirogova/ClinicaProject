@@ -9,7 +9,9 @@ import com.example.clinicaproject.service.VolunteerHabitsInfoService;
 import com.example.clinicaproject.service.VolunteerPrimaryHealthInfoService;
 import com.example.clinicaproject.service.VolunteerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
@@ -22,7 +24,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,15 +50,16 @@ public class VolunteerController {
 
 
     @GetMapping(value = "/registerVolunteer")
-    public ModelAndView registerPageVolunteer(ModelAndView modelAndView, @AuthenticationPrincipal User user) {
-        System.out.println(user.getUsername());
+    public ModelAndView registerPageVolunteer(ModelAndView modelAndView) {
+
         modelAndView.setViewName("registrationVolunteer");
         return modelAndView;
     }
 
     @PostMapping(value = "/registrationVolunteer")
-    public ModelAndView registerVolunteer(@ModelAttribute("volunteer") Volunteer volunteer, @AuthenticationPrincipal User user) {
+    public ModelAndView registerVolunteer(@ModelAttribute Volunteer volunteer, @AuthenticationPrincipal User user) {
         ModelAndView modelAndView = new ModelAndView();
+        volunteer.setEmail(SecurityContextHolder.getContext().getAuthentication().getName());
         Volunteer volunteer1 = volunteerService.addVolunteer(volunteer);
         httpSession.setAttribute("newVolunteer", volunteer1);
         modelAndView.setViewName("redirect:/registrationVolunteerHabitsInfo");
@@ -109,13 +111,13 @@ public class VolunteerController {
     @PostMapping("/volunteersAll")
     public ModelAndView volunteersAll1(
 //            @RequestParam(value = "DoB", required = false) String DoB,
-                                       @RequestParam(value = "email", required = false) String email,
-                                       @RequestParam(value = "firstName", required = false) String firstName,
-                                       @RequestParam(value = "middleName", required = false) String middleName,
-                                       @RequestParam(value = "lastName", required = false) String lastName,
-                                       @RequestParam(value = "phoneNumber", required = false) String phoneNumber,
-                                       @RequestParam(value = "gender", required = false) String gender,
-                                       ModelAndView modelAndView, RedirectAttributes ra) {
+            @RequestParam(value = "email", required = false) String email,
+            @RequestParam(value = "firstName", required = false) String firstName,
+            @RequestParam(value = "middleName", required = false) String middleName,
+            @RequestParam(value = "lastName", required = false) String lastName,
+            @RequestParam(value = "phoneNumber", required = false) String phoneNumber,
+            @RequestParam(value = "gender", required = false) String gender,
+            ModelAndView modelAndView, RedirectAttributes ra) {
         ra
 //                .addAttribute("DoB", DoB)
                 .addAttribute("email", email)
@@ -131,13 +133,13 @@ public class VolunteerController {
     @GetMapping("/volunteersAllFiltered")
     public ModelAndView volunteersAll2(
 //            @RequestParam(value = "DoB", required = false) String DoB,
-                                       @RequestParam(value = "email", required = false) String email,
-                                       @RequestParam(value = "firstName", required = false) String firstName,
-                                       @RequestParam(value = "middleName", required = false) String middleName,
-                                       @RequestParam(value = "lastName", required = false) String lastName,
-                                       @RequestParam(value = "phoneNumber", required = false) String phoneNumber,
-                                       @RequestParam(value = "gender", required = false) String gender,
-                                       ModelAndView modelAndView) {
+            @RequestParam(value = "email", required = false) String email,
+            @RequestParam(value = "firstName", required = false) String firstName,
+            @RequestParam(value = "middleName", required = false) String middleName,
+            @RequestParam(value = "lastName", required = false) String lastName,
+            @RequestParam(value = "phoneNumber", required = false) String phoneNumber,
+            @RequestParam(value = "gender", required = false) String gender,
+            ModelAndView modelAndView) {
         List<Volunteer> volunteers = volunteerService.allVolunteers();
 //        modelAndView.addObject("volunteers", volunteers);
 //        if (DoB != null) {

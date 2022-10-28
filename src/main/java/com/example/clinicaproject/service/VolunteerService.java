@@ -15,5 +15,5 @@ public interface VolunteerService {
 
     Volunteer getVolunteerByID(int id);
 
-    Volunteer findByEmail (String email);
+    Volunteer findByEmail(String email);
 }
