@@ -16,7 +16,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @EnableWebSecurity
 @Configuration
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SpringSecurityConfig {
     private final AuthenticationConfiguration authenticationConfiguration;
     private final UserDetailsService userDetailsService;
@@ -34,10 +34,12 @@ public class SpringSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable().
-                authorizeHttpRequests(
+        http
+                .csrf().disable()
+                .authorizeHttpRequests(
                         request -> request.antMatchers(
-                                        "/", "/registrationV", "/contacts").permitAll()
+                                        "/", "/registration", "/contacts").permitAll()
+//                                .antMatchers("/medicine").hasRole("DOCTOR")
                                 .anyRequest().authenticated())
                 .formLogin(login -> login.loginPage("/login").permitAll())
                 .logout(logout -> logout.permitAll().deleteCookies("JSESSIONID"));

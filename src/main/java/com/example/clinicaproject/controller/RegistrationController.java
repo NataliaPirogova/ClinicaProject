@@ -11,27 +11,24 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashSet;
-import java.util.List;
-
 @Controller
 public class RegistrationController {
 
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
     public RegistrationController(UserService userService) {
         this.userService = userService;
     }
 
-    @GetMapping("/registrationV")
-    public ModelAndView registration(ModelAndView model) {
+    @GetMapping("/registration")
+    public ModelAndView registrationV(ModelAndView model) {
         model.setViewName("registration");
         return model;
     }
 
-    @PostMapping("/registrationV")
-    public ModelAndView addUser(@ModelAttribute User user, ModelAndView modelAndView) {
+    @PostMapping("/registration")
+    public ModelAndView addUserV(@ModelAttribute User user, ModelAndView modelAndView) {
         User userFromDb = userService.findByName(user.getUsername());
 
         if (userFromDb != null) {
@@ -39,10 +36,13 @@ public class RegistrationController {
             modelAndView.setViewName("registration");
             return modelAndView;
         }
-        user.setRoleSet(new HashSet<>(List.of(Role.VOLUNTEER)));
         userService.save(user);
-//        httpSession.setAttribute("user1", user);
-        modelAndView.setViewName("redirect:/registerVolunteer");
+        if (user.getRoleSet().contains(Role.VOLUNTEER)) {
+            modelAndView.setViewName("redirect:/registerVolunteer");
+        }
+        if (user.getRoleSet().contains(Role.DOCTOR)) {
+            modelAndView.setViewName("redirect:/registerDoctor");
+        }
         return modelAndView;
     }
 

@@ -15,4 +15,6 @@ public interface DoctorService {
     void editDoctor(Doctor doctor);
 
     Doctor getById(int id);
+
+    Doctor findByEmail(String email);
 }

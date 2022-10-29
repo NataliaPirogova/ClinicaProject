@@ -14,16 +14,16 @@ import java.util.Set;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "volunteer", uniqueConstraints={@UniqueConstraint(columnNames={"email"})})
-public class Volunteer{
+@Table(name = "volunteer", uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})})
+public class Volunteer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "volunteer_role", joinColumns = @JoinColumn(name = "volunteer_id"))
-    @Enumerated(EnumType.STRING)
-    private Set<Role> roles;
+//    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+//    @CollectionTable(name = "volunteer_role", joinColumns = @JoinColumn(name = "volunteer_id"))
+//    @Enumerated(EnumType.STRING)
+//    private Set<Role> roles;
     private String firstName;//имя
     private String lastName;//фамилия
     private String middleName;//отчество
@@ -35,7 +35,6 @@ public class Volunteer{
     private long phoneNumber;
     @Column(unique = true)
     private String email;
-//    private String password;
     @OneToOne(mappedBy = "volunteer")
     private VolunteerHabitsInfo volunteerHabitsInfo;
     @OneToOne(mappedBy = "volunteer")
@@ -43,4 +42,7 @@ public class Volunteer{
     @ManyToOne
     @JoinColumn(name = "medicine_id")
     Medicine medicine;
+    @OneToOne
+    @JoinColumn(name = "users_id", referencedColumnName = "id")
+    User userV;
 }

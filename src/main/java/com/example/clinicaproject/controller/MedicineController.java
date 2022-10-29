@@ -6,6 +6,8 @@ import com.example.clinicaproject.model.Volunteer;
 import com.example.clinicaproject.service.MedicineManufacturerService;
 import com.example.clinicaproject.service.MedicineService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+@PreAuthorize("hasAuthority('DOCTOR')")
 @Controller
 @RequestMapping("/medicine")
 public class MedicineController {
@@ -37,6 +40,7 @@ public class MedicineController {
         return modelAndView;
     }
 
+//    @PreAuthorize("hasAuthority('DOCTOR')")
     @GetMapping(value = "/add")
     public ModelAndView registrationMedicinePage(ModelAndView modelAndView) {
         List<MedicineManufacturer> manufacturers = medicineManufacturerService.allMedicineManufacturers();
