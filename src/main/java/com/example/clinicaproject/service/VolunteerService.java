@@ -5,6 +5,8 @@ import com.example.clinicaproject.model.User;
 import com.example.clinicaproject.model.Volunteer;
 
 import java.util.List;
+import java.util.List;
+import java.util.Set;
 
 public interface VolunteerService {
     List<Volunteer> allVolunteers();
@@ -20,5 +22,5 @@ public interface VolunteerService {
     Volunteer findByEmail(String email);
     Volunteer findByUserV (User user);
 
-//    void editSideEffectSet (SideEffect sideEffect);
+//    void editSideEffectList (SideEffect sideEffect);
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.List;
 
 
 @Service
@@ -38,7 +39,7 @@ public class MedicineManufacturerServiceImplementation implements MedicineManufa
 
     @Override
     public List<MedicineManufacturer> allMedicineManufacturers() {
-        return medicineManufacturerRepository.findAll();
+        return (List<MedicineManufacturer>) medicineManufacturerRepository.findAll();
     }
 
     @Override

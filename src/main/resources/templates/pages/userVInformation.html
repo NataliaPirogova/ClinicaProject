@@ -88,27 +88,29 @@
 <th:block th:if="${medicineVolunteerID != null}">
     <td>
         <span>Side effects that I see:</span><br>
-        <span th:if="${sideEffectSet != null}">
-    <tr th:each="sideEffect, i: ${sideEffectSet}">
-        <td th:utext="${sideEffect.name}"></td>
-    </tr>
-</span> <br>
+        <span th:if="${sideEffectList != null}">
+             <tr th:each="sideEffect, i: ${sideEffectList}">
+             <td th:utext="${sideEffect.name}"></td>
+             </tr>
+        </span> <br>
         <form id="form2" th:action="@{/editSideEffects}" method="post" th:object="${sideEffect}">
-
-            <label for="name">
-                <input id="name" name="name" th:placeholder="'Fever etc.'" th:value="${name}">
-            </label>
             <br>
-<!--            <label for="medicine">-->
-<!--                <input type="text" id="medicine" name="medicine"-->
-<!--                       th:placeholder="${volunteer.getMedicine().name}" th:value="${medicine}"></label>-->
-<!--            <br>-->
-<!--            <label for="volunteerSet">-->
-<!--                <input type="text" id="volunteerSet" name="volunteerSet"-->
-<!--                       th:placeholder="${volunteer}" th:value="${volunteerSet}"></label>-->
-<!--            <br>-->
-    <button type="submit">Next</button>
-    </form>
+            <span>Add new side effect</span>
+            <br>
+            <label for="name">
+                <select class="form-control" id="name" name="name">
+                    <option value="">Select task for disable</option>
+                    <option th:each="sideEffect1 : ${sideEffectList}"
+                            th:value="${sideEffect1.name}"
+                            th:text="${sideEffect1.name}">
+                    </option>
+                </select></label><br>
+            </label>
+
+            <br><br><br>
+            <br>
+            <button type="submit">Next</button>
+        </form>
 
 </th:block>
 <br>

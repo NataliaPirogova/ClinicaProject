@@ -9,7 +9,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,10 +23,6 @@ public class Volunteer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-//    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
-//    @CollectionTable(name = "volunteer_role", joinColumns = @JoinColumn(name = "volunteer_id"))
-//    @Enumerated(EnumType.STRING)
-//    private Set<Role> roles;
     private String firstName;//имя
     private String lastName;//фамилия
     private String middleName;//отчество
@@ -46,6 +44,6 @@ public class Volunteer {
     @OneToOne
     @JoinColumn(name = "users_id", referencedColumnName = "id")
     User userV;
-    @ManyToMany(mappedBy = "volunteerSet")
-    List<SideEffect> sideEffectSet = new ArrayList<>();
+    @ManyToMany(mappedBy = "volunteerList")
+    Set<SideEffect> sideEffectList = new HashSet<>();
 }

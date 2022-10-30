@@ -2,11 +2,11 @@ package com.example.clinicaproject.controller;
 
 import com.example.clinicaproject.model.Medicine;
 import com.example.clinicaproject.model.MedicineManufacturer;
+import com.example.clinicaproject.model.SideEffect;
 import com.example.clinicaproject.model.Volunteer;
 import com.example.clinicaproject.service.MedicineManufacturerService;
 import com.example.clinicaproject.service.MedicineService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Set;
 
 @PreAuthorize("hasAuthority('DOCTOR')")
 @Controller
@@ -40,7 +41,6 @@ public class MedicineController {
         return modelAndView;
     }
 
-//    @PreAuthorize("hasAuthority('DOCTOR')")
     @GetMapping(value = "/add")
     public ModelAndView registrationMedicinePage(ModelAndView modelAndView) {
         List<MedicineManufacturer> manufacturers = medicineManufacturerService.allMedicineManufacturers();
@@ -52,7 +52,6 @@ public class MedicineController {
     @PostMapping(value = "/add")
     public ModelAndView registrationMedicine(@RequestParam(value = "nameManufacturer") String nameManufacturer,
                                              @ModelAttribute("medicine") Medicine medicine, ModelAndView modelAndView) {
-//        MedicineManufacturer manufacturer = (MedicineManufacturer) httpSession.getAttribute("newManufacturer");
         MedicineManufacturer manufacturer = medicineManufacturerService.findByName(nameManufacturer);
         medicine.setManufacturer(manufacturer);
         medicineService.add(medicine);
@@ -81,6 +80,12 @@ public class MedicineController {
                                          @PathVariable(value = "medicineId") int medicineId) {
         Medicine medicineById = medicineService.getMedicineById(medicineId);
         List<Volunteer> volunteersMedicineById = medicineById.getVolunteer();
+        Set<SideEffect> sideEffects = (Set<SideEffect>) medicineById.getSideEffect();
+        for (SideEffect s:
+                sideEffects) {
+        }
+
+        modelAndView.addObject("sideEffects", sideEffects);
         modelAndView.addObject("medicineById", medicineById);
         modelAndView.addObject("volunteersMedicineById", volunteersMedicineById);
         httpSession.setAttribute("medicineId", medicineId);

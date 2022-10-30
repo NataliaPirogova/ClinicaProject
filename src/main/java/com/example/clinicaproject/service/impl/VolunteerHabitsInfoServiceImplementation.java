@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.List;
 
 @Service
 @Transactional
@@ -37,6 +38,6 @@ public class VolunteerHabitsInfoServiceImplementation implements VolunteerHabits
 
     @Override
     public List<VolunteerHabitsInfo> allVolunteerHabitsInfo() {
-        return volunteerHabitsInfoRepository.findAll();
+        return (List<VolunteerHabitsInfo>) volunteerHabitsInfoRepository.findAll();
     }
 }

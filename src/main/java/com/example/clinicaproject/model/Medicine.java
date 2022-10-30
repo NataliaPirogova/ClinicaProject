@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -26,5 +28,5 @@ public class Medicine {
     @OneToMany(mappedBy = "medicine")
     List<Volunteer> volunteer = new ArrayList<>();
     @ManyToMany(mappedBy = "medicine")
-    List<SideEffect> sideEffect = new ArrayList<>();
+    Set<SideEffect> sideEffect = new HashSet<>();
 }

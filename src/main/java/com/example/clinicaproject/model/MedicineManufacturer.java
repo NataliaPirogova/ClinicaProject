@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -23,5 +24,5 @@ public class MedicineManufacturer {
     private String countryOfOrigin;
     private String city;
     @OneToMany(mappedBy = "manufacturer")
-    private List<Medicine> medicineList;
+    private List<Medicine> medicineList = new ArrayList<>();
 }

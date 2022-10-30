@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Data
@@ -18,10 +17,6 @@ public class Doctor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-//    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
-//    @CollectionTable(name = "doctor_role", joinColumns = @JoinColumn(name = "doctor_id"))
-//    @Enumerated(EnumType.STRING)
-//    private Set<Role> roles;
     private String firstName;//имя
     private String lastName;//фамилия
     private String middleName;//отчество

@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "side_effects")
+@Table(name = "side_effects", uniqueConstraints = {@UniqueConstraint(columnNames = {"name"})})
 public class SideEffect {
 
     @Id
@@ -23,15 +23,15 @@ public class SideEffect {
     @ManyToMany
     @JoinTable(
             name = "side_effects_medicine",
-            joinColumns = { @JoinColumn(name = "side_effects_id") },
-            inverseJoinColumns = { @JoinColumn(name = "medicine_id") }
+            joinColumns = {@JoinColumn(name = "side_effects_id")},
+            inverseJoinColumns = {@JoinColumn(name = "medicine_id")}
     )
     List<Medicine> medicine = new ArrayList<>();
     @ManyToMany
     @JoinTable(
             name = "side_effects_volunteer",
-            joinColumns = { @JoinColumn(name = "side_effects_id") },
-            inverseJoinColumns = { @JoinColumn(name = "volunteer_id") }
+            joinColumns = {@JoinColumn(name = "side_effects_id")},
+            inverseJoinColumns = {@JoinColumn(name = "volunteer_id")}
     )
-    List<Volunteer> volunteerSet = new ArrayList<>();
+    List<Volunteer> volunteerList = new ArrayList<>();
 }

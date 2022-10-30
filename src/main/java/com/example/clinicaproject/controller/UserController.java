@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class UserController {
@@ -37,10 +38,8 @@ public class UserController {
     public ModelAndView editUserV(ModelAndView modelAndView, @PathVariable int id) {
         Volunteer volunteerID = volunteerService.getVolunteerByID(id);
         Medicine medicineVolunteerID = volunteerID.getMedicine();
-        if (medicineVolunteerID != null) {
-            List<SideEffect> sideEffectSet = volunteerID.getSideEffectSet();
-            modelAndView.addObject("sideEffectSet", sideEffectSet);
-        }
+        Set<SideEffect> sideEffectList = sideEffectService.allSideEffects();
+        modelAndView.addObject("sideEffectList", sideEffectList);
         modelAndView.addObject("volunteerID", volunteerID);
         modelAndView.addObject("medicineVolunteerID", medicineVolunteerID);
         modelAndView.setViewName("userVInformation");
@@ -64,14 +63,19 @@ public class UserController {
                                        @ModelAttribute SideEffect sideEffect) {
         User user = userService.findByName(SecurityContextHolder.getContext().getAuthentication().getName());
         Volunteer volunteer = volunteerService.findByUserV(user);
-        List<Volunteer> volunteersForThisSideEffect = sideEffect.getVolunteerSet();
-        volunteersForThisSideEffect.add(volunteer);
-        sideEffect.setVolunteerSet(volunteersForThisSideEffect);
-        List<Medicine> medicinesForThisSideEffect = sideEffect.getMedicine();
+        SideEffect sideEffectChoosen = sideEffectService.findByName(sideEffect.getName());
+        List<Volunteer> volunteersForThisSideEffect = sideEffectChoosen.getVolunteerList();
+        List<Medicine> medicinesForThisSideEffect = sideEffectChoosen.getMedicine();
+//        Set<SideEffect> sideEffectList = sideEffectService.allSideEffects();
+//        if(sideEffectList.stream().filter(s->s.getName().equals(sideEffect.getName())).toList()!=null){
+//            sideEffect.setId(sideEffectService.findByName().getId());
+//        }
         Medicine medicineVolunteerID = volunteer.getMedicine();
+        volunteersForThisSideEffect.add(volunteer);
+        sideEffectChoosen.setVolunteerList(volunteersForThisSideEffect);
         medicinesForThisSideEffect.add(medicineVolunteerID);
-        sideEffect.setMedicine(medicinesForThisSideEffect);
-        sideEffectService.editSideEffect(sideEffect);
+        sideEffectChoosen.setMedicine(medicinesForThisSideEffect);
+        sideEffectService.editSideEffect(sideEffectChoosen);
         int id = volunteer.getId();
         modelAndView.addObject("id", id);
         modelAndView.setViewName("redirect:/volunteer/{id}");

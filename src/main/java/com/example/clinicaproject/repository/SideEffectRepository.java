@@ -7,12 +7,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public interface SideEffectRepository extends JpaRepository<SideEffect, Integer> {
-    List<SideEffect> findAllByMedicine(Medicine medicine);
+    Set<SideEffect> findAllByMedicine(Medicine medicine);
 
-    List<SideEffect> findAllByVolunteerSet(Volunteer volunteer);
+    List<SideEffect> findAllByVolunteerList(Volunteer volunteer);
 
     SideEffect findByName(String name);
 }

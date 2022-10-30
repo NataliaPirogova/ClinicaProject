@@ -1,6 +1,5 @@
 package com.example.clinicaproject.controller;
 
-import com.example.clinicaproject.model.User;
 import com.example.clinicaproject.model.Volunteer;
 import com.example.clinicaproject.model.VolunteerHabitsInfo;
 import com.example.clinicaproject.model.VolunteerPrimaryHealthInfo;
@@ -8,7 +7,6 @@ import com.example.clinicaproject.model.enums.*;
 import com.example.clinicaproject.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -5,18 +5,20 @@ import com.example.clinicaproject.model.SideEffect;
 import com.example.clinicaproject.model.Volunteer;
 
 import java.util.List;
+import java.util.List;
+import java.util.Set;
 
 public interface SideEffectService {
     void editSideEffect(SideEffect sideEffect);
 
-    List<SideEffect> allSideEffects();
+    Set<SideEffect> allSideEffects();
 
     void addSideEffect(SideEffect sideEffect);
 
-    void editSideEffectSet(SideEffect sideEffect);
+    void editSideEffectList(SideEffect sideEffect);
 
-    void editSideEffectSetForMedicine(SideEffect sideEffect, Medicine medicine);
+    void editSideEffectListForMedicine(SideEffect sideEffect, Medicine medicine);
 
-    void editSideEffectSetForVolunteer(SideEffect sideEffect, Volunteer volunteer);
+    void editSideEffectListForVolunteer(SideEffect sideEffect, Volunteer volunteer);
     SideEffect findByName(String name);
 }

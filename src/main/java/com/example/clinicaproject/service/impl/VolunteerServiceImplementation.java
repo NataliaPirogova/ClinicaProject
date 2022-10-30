@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.List;
 
 @Service
 @Transactional
@@ -24,7 +25,7 @@ public class VolunteerServiceImplementation implements VolunteerService {
 
     @Override
     public List<Volunteer> allVolunteers() {
-        return volunteerRepository.findAll();
+        return (List<Volunteer>) volunteerRepository.findAll();
     }
 
     @Override
@@ -58,7 +59,7 @@ public class VolunteerServiceImplementation implements VolunteerService {
     }
 
 //    @Override
-//    public void editSideEffectSet(SideEffect sideEffect) {
+//    public void editSideEffectList(SideEffect sideEffect) {
 //        volunteerRepository.
 //    }
 }

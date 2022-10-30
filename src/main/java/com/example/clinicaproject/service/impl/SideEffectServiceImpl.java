@@ -9,7 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -28,8 +29,8 @@ public class SideEffectServiceImpl implements SideEffectService {
     }
 
     @Override
-    public List<SideEffect> allSideEffects() {
-        return sideEffectRepository.findAll();
+    public Set<SideEffect> allSideEffects() {
+        return new HashSet<>(sideEffectRepository.findAll());
     }
 
     @Override
@@ -38,20 +39,27 @@ public class SideEffectServiceImpl implements SideEffectService {
     }
 
     @Override
-    public void editSideEffectSet(SideEffect sideEffect) {
-        List<SideEffect> sideEffectListCurrent = sideEffectRepository.findAll();
+    public void editSideEffectList(SideEffect sideEffect) {
+        Set<SideEffect> sideEffectListCurrent = (Set<SideEffect>) sideEffectRepository.findAll();
+        for (SideEffect s :
+                sideEffectListCurrent) {
+            if (s.getName().equals(sideEffect.getName())) {
+                sideEffectRepository.save(sideEffect);
+                break;
+            }
+        }
         sideEffectListCurrent.add(sideEffect);
     }
 
     @Override
-    public void editSideEffectSetForMedicine(SideEffect sideEffect, Medicine medicine) {
-        List<SideEffect> sideEffectListCurrent = sideEffectRepository.findAllByMedicine(medicine);
+    public void editSideEffectListForMedicine(SideEffect sideEffect, Medicine medicine) {
+        Set<SideEffect> sideEffectListCurrent = (Set<SideEffect>) sideEffectRepository.findAllByMedicine(medicine);
         sideEffectListCurrent.add(sideEffect);
     }
 
     @Override
-    public void editSideEffectSetForVolunteer(SideEffect sideEffect, Volunteer volunteer) {
-        List<SideEffect> sideEffectListCurrent = sideEffectRepository.findAllByVolunteerSet(volunteer);
+    public void editSideEffectListForVolunteer(SideEffect sideEffect, Volunteer volunteer) {
+        Set<SideEffect> sideEffectListCurrent = (Set<SideEffect>) sideEffectRepository.findAllByVolunteerList(volunteer);
         sideEffectListCurrent.add(sideEffect);
     }
 

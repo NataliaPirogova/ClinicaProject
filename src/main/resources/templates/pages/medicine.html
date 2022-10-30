@@ -15,6 +15,7 @@
         <th>City of manufacturer</th>
         <th>Country of manufacturer</th>
         <th>Quantity of volunteer for this medicine</th>
+        <th>Side effects</th>
     </tr>
     <tr>
         <td th:utext="${medicineById.medicineName}"></td>
@@ -22,6 +23,14 @@
         <td th:utext="${medicineById.getManufacturer().city}"></td>
         <td th:utext="${medicineById.getManufacturer().countryOfOrigin}"></td>
         <td th:utext="${medicineById.getVolunteer().size()} + ' ' + volunteers"></td>
+        <td>
+               <span th:if="${sideEffects != null}">
+    <div th:each="sideEffect, i: ${sideEffects}">
+        <div th:with="result=${(sideEffect.getVolunteerList().size()) /(medicineById.getVolunteer().size())* 100}+ ' %'">
+        <span th:utext="${sideEffect.name} + ' was detected in '+ ${result}">        </span>
+    </div>
+    </span> <br>
+        </td>
     </tr>
 </table>
 <br>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.List;
 
 @Service
 @Transactional
@@ -24,7 +25,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findAll() {
-        return userRepo.findAll();
+        return (List<User>) userRepo.findAll();
     }
 
     @Override
