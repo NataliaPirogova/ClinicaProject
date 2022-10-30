@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,6 +24,7 @@ public class Medicine {
     @JoinColumn(name = "manufacturers_id")
     private MedicineManufacturer manufacturer;
     @OneToMany(mappedBy = "medicine")
-    List<Volunteer> volunteer;
-
+    List<Volunteer> volunteer = new ArrayList<>();
+    @ManyToMany(mappedBy = "medicine")
+    List<SideEffect> sideEffect = new ArrayList<>();
 }

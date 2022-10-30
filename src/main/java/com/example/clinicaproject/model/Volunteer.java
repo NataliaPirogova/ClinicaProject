@@ -8,7 +8,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -45,4 +46,6 @@ public class Volunteer {
     @OneToOne
     @JoinColumn(name = "users_id", referencedColumnName = "id")
     User userV;
+    @ManyToMany(mappedBy = "volunteerSet")
+    List<SideEffect> sideEffectSet = new ArrayList<>();
 }

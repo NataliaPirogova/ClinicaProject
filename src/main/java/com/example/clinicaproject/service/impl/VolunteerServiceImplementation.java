@@ -1,5 +1,7 @@
 package com.example.clinicaproject.service.impl;
 
+import com.example.clinicaproject.model.SideEffect;
+import com.example.clinicaproject.model.User;
 import com.example.clinicaproject.model.Volunteer;
 import com.example.clinicaproject.repository.VolunteerRepository;
 import com.example.clinicaproject.service.VolunteerService;
@@ -49,4 +51,14 @@ public class VolunteerServiceImplementation implements VolunteerService {
     public Volunteer findByEmail(String email) {
         return volunteerRepository.findByEmail(email);
     }
+
+    @Override
+    public Volunteer findByUserV(User user) {
+        return volunteerRepository.findByUserV(user);
+    }
+
+//    @Override
+//    public void editSideEffectSet(SideEffect sideEffect) {
+//        volunteerRepository.
+//    }
 }

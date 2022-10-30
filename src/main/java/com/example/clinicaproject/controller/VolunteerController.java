@@ -96,7 +96,7 @@ public class VolunteerController {
         Volunteer volunteer = (Volunteer) httpSession.getAttribute("newVolunteer");
         volunteerPrimaryHealthInfo.setVolunteer(volunteer);
         volunteerPrimaryHealthInfoService.addVolunteerPrimaryHealthInfo(volunteerPrimaryHealthInfo);
-        modelAndView.setViewName("main");
+        modelAndView.setViewName("redirect:/volunteer/{id}");
         return modelAndView;
     }
 //

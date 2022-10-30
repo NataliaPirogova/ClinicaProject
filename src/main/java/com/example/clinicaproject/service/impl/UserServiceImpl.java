@@ -3,12 +3,15 @@ package com.example.clinicaproject.service.impl;
 import com.example.clinicaproject.model.User;
 import com.example.clinicaproject.repository.UserRepository;
 import com.example.clinicaproject.service.UserService;
+import org.springframework.security.core.Transient;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
     private UserRepository userRepo;
 
