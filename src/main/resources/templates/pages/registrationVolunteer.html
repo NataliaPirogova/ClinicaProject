@@ -23,12 +23,8 @@
         <option th:value="MALE">male</option>
     </select></label><br>
     <label for="phoneNumber">Phone number
-    <input th:type="text" id="phoneNumber" th:field="*{phoneNumber}"
+    <input th:type="text" id="phoneNumber" th:field="*{phoneNumber}" placeholder="+375*********"
            pattern="^(\+375|80)(29|25|44|33)(\d{3})(\d{2})(\d{2})$" required></label><br>
-<!--    <label for="email">Email-->
-<!--        <input th:type="text" id="email" th:value="${email}" readonly></input></label><br>-->
-<!--    <label for="password">Password-->
-<!--        <input th:type="password" id="password" th:field="*{password}" required></label><br>-->
     <input type="submit">
 </form>
 <footer th:insert="blocks/header :: footer"></footer>

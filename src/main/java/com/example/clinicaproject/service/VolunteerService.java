@@ -3,6 +3,7 @@ package com.example.clinicaproject.service;
 import com.example.clinicaproject.model.SideEffect;
 import com.example.clinicaproject.model.User;
 import com.example.clinicaproject.model.Volunteer;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.List;
@@ -23,4 +24,5 @@ public interface VolunteerService {
     Volunteer findByUserV (User user);
 
 //    void editSideEffectList (SideEffect sideEffect);
+    List<Volunteer> findMatchByFirstNameAndLastName(String firstName, String lastName);
 }

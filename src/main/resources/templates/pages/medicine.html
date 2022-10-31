@@ -26,7 +26,8 @@
         <td>
                <span th:if="${sideEffects != null}">
     <div th:each="sideEffect, i: ${sideEffects}">
-        <div th:with="result=${(sideEffect.getVolunteerList().size()) /(medicineById.getVolunteer().size())* 100}+ ' %'">
+        <div th:with="result=${100*
+        (sideEffect.getVolunteerList().size()) /(medicineById.getVolunteer().size())}+ ' %'">
         <span th:utext="${sideEffect.name} + ' was detected in '+ ${result}">        </span>
     </div>
     </span> <br>
@@ -35,7 +36,7 @@
 </table>
 <br>
 
-<a th:href="@{~/clinicalResearch/volunteersAllByHabitsInfo}">Find new volunteers for research of this medicine</a>
-
+<a th:href="@{~/clinicalResearch/volunteersAll}">Find new volunteers for research of this medicine</a>
+<footer th:insert="blocks/header :: footer"></footer>
 </body>
 </html>

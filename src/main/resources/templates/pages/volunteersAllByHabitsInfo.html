@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+<header th:insert="blocks/header :: header"></header>
 <table>
     <tr>
         <th>Smoking</th>
@@ -109,6 +110,6 @@
 
 <a th:href="@{~/clinicalResearch/medicine/test/{id}}">Return to medicine</a>
 
-
+<footer th:insert="blocks/header :: footer"></footer>
 </body>
 </html>

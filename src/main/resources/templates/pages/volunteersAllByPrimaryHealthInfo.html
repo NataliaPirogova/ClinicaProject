@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+<header th:insert="blocks/header :: header"></header>
 <table>
     <tr>
         <th>Id</th>
@@ -25,5 +26,6 @@
         <td th:utext="${volunteerPrimaryHealthInfo.volunteer.id}" hidden></td>
     </tr>
 </table>
+<footer th:insert="blocks/header :: footer"></footer>
 </body>
 </html>

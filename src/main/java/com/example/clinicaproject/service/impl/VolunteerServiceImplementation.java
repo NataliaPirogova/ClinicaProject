@@ -58,6 +58,11 @@ public class VolunteerServiceImplementation implements VolunteerService {
         return volunteerRepository.findByUserV(user);
     }
 
+    @Override
+    public List<Volunteer> findMatchByFirstNameAndLastName(String firstName, String lastName) {
+        return volunteerRepository.findMatchByFirstNameAndLastName(firstName,lastName);
+    }
+
 //    @Override
 //    public void editSideEffectList(SideEffect sideEffect) {
 //        volunteerRepository.

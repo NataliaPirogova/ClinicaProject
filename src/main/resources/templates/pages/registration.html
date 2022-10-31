@@ -4,7 +4,7 @@
     <title>Spring Boot Thymeleaf + Spring Security</title>
 </head>
 <body>
-
+<header th:insert="blocks/header :: header"></header>
 <div class="container">
     <h2>Registration</h2>
     <form th:action="@{/registration}" method="post" th:object="${user}">
@@ -22,5 +22,6 @@
         <div><input type="submit" value="Sign In"/></div>
     </form>
 </div>
+<footer th:insert="blocks/header :: footer"></footer>
 </body>
 </html>

@@ -35,8 +35,8 @@ public class UserController {
     }
 
     @GetMapping("/volunteer/{id}")
-    public ModelAndView editUserV(ModelAndView modelAndView, @PathVariable int id) {
-        Volunteer volunteerID = volunteerService.getVolunteerByID(id);
+    public ModelAndView editUserV(ModelAndView modelAndView, @PathVariable long id) {
+        Volunteer volunteerID = volunteerService.findByUserV(userService.findById(id));
         Medicine medicineVolunteerID = volunteerID.getMedicine();
         Set<SideEffect> sideEffectList = sideEffectService.allSideEffects();
         modelAndView.addObject("sideEffectList", sideEffectList);

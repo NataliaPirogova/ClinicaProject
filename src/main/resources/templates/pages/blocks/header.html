@@ -1,9 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/" lang="en">
+<meta charset="UTF-8">
 <div th:fragment="header">
-    <div>
-        <h5>Main page</h5>
-        <h5>About programm</h5>
-        <h5>Contacts</h5>
-    </div>
+    <a th:href="@{~/clinicalResearch}">Home page</a>
+    <a th:href="@{contacts}">Contacts</a><br>
+    <a th:href="@{healthcareorganizations}">Organizations</a><br>
 </div>
 <div th:fragment="footer">
     <div>

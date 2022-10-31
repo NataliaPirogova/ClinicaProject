@@ -5,6 +5,7 @@
     <title>Add medicine</title>
 </head>
 <body>
+<header th:insert="blocks/header :: header"></header>
 <div>
     Add new medicine for clinical trials. Fill in the following form.
 </div>
@@ -12,8 +13,8 @@
     <label for="manufacturer">Choose manufacturer from database:
 
             <ul th:each="manufacturer, i : ${manufacturers}">
-                <input type="radio" id="manufacturer" name="nameManufacturer" th:value="${manufacturer.name}">
-                <li th:text="${i.index}+' '+${manufacturer.name}"></li>
+                <input type="radio" id="manufacturer" name="nameManufacturer" th:value="${manufacturer.name}" th:text="${manufacturer.name}">
+<!--                <li th:text="${manufacturer.name}"></li>-->
             </ul>
             <p>or</p><br>
             <a th:href="@{/medicine/registerManufacturer}">Add new manufacturer</a>
@@ -24,5 +25,6 @@
     <br>
     <input type="submit">
 </form>
+<footer th:insert="blocks/header :: footer"></footer>
 </body>
 </html>

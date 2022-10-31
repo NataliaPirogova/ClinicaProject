@@ -5,6 +5,7 @@
     <title>All volunteers</title>
 </head>
 <body>
+<header th:insert="blocks/header :: header"></header>
 <h3>My information</h3>
 
 <form id="form1" th:action="@{/editVolunteer}" method="post" th:object="${volunteerID}">
@@ -117,6 +118,6 @@
 <br>
 
 <a th:href="@{~/clinicalResearch}">Home page</a>
-
+<footer th:insert="blocks/header :: footer"></footer>
 </body>
 </html>

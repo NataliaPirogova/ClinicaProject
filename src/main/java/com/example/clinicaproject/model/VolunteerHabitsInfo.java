@@ -24,6 +24,7 @@ public class VolunteerHabitsInfo {
     private boolean takingMedicines;
     private boolean isPregnantNow;
     @Enumerated(EnumType.STRING)
+
     private PlanningPregnancy isPlanningPregnancy;
     private boolean vegetarian;
     private boolean takingHormonalContraceptives;

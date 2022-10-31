@@ -56,69 +56,93 @@ public class VolunteerDBController {
 
     @PostMapping("/volunteersAll")
     public ModelAndView volunteersAll1(
-//            @RequestParam(value = "DoB", required = false) String DoB,
-            @RequestParam(value = "email", required = false) String email,
             @RequestParam(value = "firstName", required = false) String firstName,
-            @RequestParam(value = "middleName", required = false) String middleName,
             @RequestParam(value = "lastName", required = false) String lastName,
-            @RequestParam(value = "phoneNumber", required = false) String phoneNumber,
-            @RequestParam(value = "gender", required = false) String gender,
             ModelAndView modelAndView, RedirectAttributes ra) {
         ra
-//                .addAttribute("DoB", DoB)
-                .addAttribute("email", email)
                 .addAttribute("firstName", firstName)
-                .addAttribute("middleName", middleName)
-                .addAttribute("lastName", lastName)
-                .addAttribute("phoneNumber", phoneNumber)
-                .addAttribute("gender", gender);
+                .addAttribute("lastName", lastName);
         modelAndView.setViewName("redirect:/volunteersAllFiltered");
         return modelAndView;
     }
+//    @PostMapping("/volunteersAll")
+//    public ModelAndView volunteersAll1(
+////            @RequestParam(value = "DoB", required = false) String DoB,
+//            @RequestParam(value = "email", required = false) String email,
+//            @RequestParam(value = "firstName", required = false) String firstName,
+//            @RequestParam(value = "middleName", required = false) String middleName,
+//            @RequestParam(value = "lastName", required = false) String lastName,
+//            @RequestParam(value = "phoneNumber", required = false) String phoneNumber,
+//            @RequestParam(value = "gender", required = false) String gender,
+//            ModelAndView modelAndView, RedirectAttributes ra) {
+//        ra
+////                .addAttribute("DoB", DoB)
+//                .addAttribute("email", email)
+//                .addAttribute("firstName", firstName)
+//                .addAttribute("middleName", middleName)
+//                .addAttribute("lastName", lastName)
+//                .addAttribute("phoneNumber", phoneNumber)
+//                .addAttribute("gender", gender);
+//        modelAndView.setViewName("redirect:/volunteersAllFiltered");
+//        return modelAndView;
+//    }
 
+    //    @GetMapping("/volunteersAllFiltered")
+//    public ModelAndView volunteersAll2(
+////            @RequestParam(value = "DoB", required = false) String DoB,
+//            @RequestParam(value = "email", required = false) String email,
+//            @RequestParam(value = "firstName", required = false) String firstName,
+//            @RequestParam(value = "middleName", required = false) String middleName,
+//            @RequestParam(value = "lastName", required = false) String lastName,
+//            @RequestParam(value = "phoneNumber", required = false) String phoneNumber,
+//            @RequestParam(value = "gender", required = false) String gender,
+//            ModelAndView modelAndView) {
+//        List<Volunteer> volunteers = volunteerService.allVolunteers();
+////        modelAndView.addObject("volunteers", volunteers);
+////        if (DoB != null) {
+////            volunteers = volunteers.stream()
+////                    .filter(v -> v.getDoB().equals(LocalDate.parse(DoB))).collect(Collectors.toList());
+////        }
+//        if (!email.isBlank()) {
+//            volunteers = volunteers.stream()
+//                    .filter(v -> v.getEmail().equals(email)).collect(Collectors.toList());
+//        }
+//        if (firstName.length() != 0) {
+//            volunteers = volunteers.stream()
+//                    .filter(v -> v.getFirstName().equals(firstName)).collect(Collectors.toList());
+//        }
+//        if (middleName.length() != 0) {
+//            volunteers = volunteers.stream()
+//                    .filter(v -> v.getMiddleName().equals(middleName)).collect(Collectors.toList());
+//        }
+//        if (lastName.length() != 0) {
+//            volunteers = volunteers.stream()
+//                    .filter(v -> v.getLastName().equals(lastName)).collect(Collectors.toList());
+//        }
+//        if (phoneNumber.length() != 0) {
+//            volunteers = volunteers.stream()
+//                    .filter(v -> (v.getPhoneNumber() == Long.valueOf(phoneNumber))).collect(Collectors.toList());
+//        }
+//        if (Gender.valueOf(gender) == Gender.FEMALE) {
+//            volunteers = volunteers.stream()
+//                    .filter(v -> v.getGender().equals(Gender.FEMALE)).collect(Collectors.toList());
+//        } else if (Gender.valueOf(gender) == Gender.MALE) {
+//            volunteers = volunteers.stream()
+//                    .filter(v -> v.getGender().equals(Gender.MALE)).collect(Collectors.toList());
+//        }
+//        modelAndView.addObject("volunteers", volunteers);
+//        httpSession.setAttribute("volunteersForMedicineResearch", volunteers);
+//        modelAndView.setViewName("volunteersAllF");
+//        return modelAndView;
+//    }
+//
     @GetMapping("/volunteersAllFiltered")
     public ModelAndView volunteersAll2(
-//            @RequestParam(value = "DoB", required = false) String DoB,
-            @RequestParam(value = "email", required = false) String email,
             @RequestParam(value = "firstName", required = false) String firstName,
-            @RequestParam(value = "middleName", required = false) String middleName,
             @RequestParam(value = "lastName", required = false) String lastName,
-            @RequestParam(value = "phoneNumber", required = false) String phoneNumber,
-            @RequestParam(value = "gender", required = false) String gender,
             ModelAndView modelAndView) {
-        List<Volunteer> volunteers = volunteerService.allVolunteers();
-//        modelAndView.addObject("volunteers", volunteers);
-//        if (DoB != null) {
-//            volunteers = volunteers.stream()
-//                    .filter(v -> v.getDoB().equals(LocalDate.parse(DoB))).collect(Collectors.toList());
-//        }
-        if (!email.isBlank()) {
-            volunteers = volunteers.stream()
-                    .filter(v -> v.getEmail().equals(email)).collect(Collectors.toList());
-        }
-        if (firstName.length() != 0) {
-            volunteers = volunteers.stream()
-                    .filter(v -> v.getFirstName().equals(firstName)).collect(Collectors.toList());
-        }
-        if (middleName.length() != 0) {
-            volunteers = volunteers.stream()
-                    .filter(v -> v.getMiddleName().equals(middleName)).collect(Collectors.toList());
-        }
-        if (lastName.length() != 0) {
-            volunteers = volunteers.stream()
-                    .filter(v -> v.getLastName().equals(lastName)).collect(Collectors.toList());
-        }
-        if (phoneNumber.length() != 0) {
-            volunteers = volunteers.stream()
-                    .filter(v -> (v.getPhoneNumber() == Long.valueOf(phoneNumber))).collect(Collectors.toList());
-        }
-        if (Gender.valueOf(gender) == Gender.FEMALE) {
-            volunteers = volunteers.stream()
-                    .filter(v -> v.getGender().equals(Gender.FEMALE)).collect(Collectors.toList());
-        } else if (Gender.valueOf(gender) == Gender.MALE) {
-            volunteers = volunteers.stream()
-                    .filter(v -> v.getGender().equals(Gender.MALE)).collect(Collectors.toList());
-        }
+//        List<Volunteer> volunteers = volunteerService.allVolunteers();
+        List<Volunteer> volunteers = volunteerService.findMatchByFirstNameAndLastName(firstName, lastName);
         modelAndView.addObject("volunteers", volunteers);
         httpSession.setAttribute("volunteersForMedicineResearch", volunteers);
         modelAndView.setViewName("volunteersAllF");

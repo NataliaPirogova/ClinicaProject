@@ -5,6 +5,7 @@
     <title>Login page</title>
 </head>
 <body>
+<header th:insert="blocks/header :: header"></header>
 <div class="container">
     <h2>Login page</h2>
     <form action="#" th:action="@{/login}" method="post">
@@ -13,5 +14,6 @@
         <div><input type="submit" value="Sign In"/></div>
     </form>
 </div>
+<footer th:insert="blocks/header :: footer"></footer>
 </body>
 </html>

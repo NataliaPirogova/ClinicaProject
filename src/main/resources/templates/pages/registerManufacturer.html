@@ -5,6 +5,7 @@
     <title>Registration of manufacturer</title>
 </head>
 <body>
+<header th:insert="blocks/header :: header"></header>
 <h3>Register a new manufacturer</h3>
 <form th:action="@{/medicine/registerManufacturer}" method="post" th:object="${manufacturer}">
     <label for="name">Name
@@ -19,6 +20,6 @@
         <input id="city" type="text" th:field="*{city}"></label><br>
     <input type="submit">
 </form>
-
+<footer th:insert="blocks/header :: footer"></footer>
 </body>
 </html>
