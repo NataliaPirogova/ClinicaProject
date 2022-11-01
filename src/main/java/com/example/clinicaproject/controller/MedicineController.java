@@ -81,10 +81,6 @@ public class MedicineController {
         Medicine medicineById = medicineService.getMedicineById(medicineId);
         List<Volunteer> volunteersMedicineById = medicineById.getVolunteer();
         Set<SideEffect> sideEffects = (Set<SideEffect>) medicineById.getSideEffect();
-        for (SideEffect s:
-                sideEffects) {
-        }
-
         modelAndView.addObject("sideEffects", sideEffects);
         modelAndView.addObject("medicineById", medicineById);
         modelAndView.addObject("volunteersMedicineById", volunteersMedicineById);

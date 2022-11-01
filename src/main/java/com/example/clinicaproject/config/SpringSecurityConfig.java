@@ -38,7 +38,7 @@ public class SpringSecurityConfig {
                 .csrf().disable()
                 .authorizeHttpRequests(
                         request -> request.antMatchers(
-                                        "/", "/registration", "/contacts").permitAll()
+                                        "/", "/healthcareorganizations", "/registration", "/contacts").permitAll()
 //                                .antMatchers("/medicine").hasRole("DOCTOR")
                                 .anyRequest().authenticated())
                 .formLogin(login -> login.loginPage("/login").permitAll())

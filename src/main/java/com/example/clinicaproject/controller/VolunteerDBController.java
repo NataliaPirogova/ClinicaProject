@@ -142,7 +142,9 @@ public class VolunteerDBController {
             @RequestParam(value = "lastName", required = false) String lastName,
             ModelAndView modelAndView) {
 //        List<Volunteer> volunteers = volunteerService.allVolunteers();
-        List<Volunteer> volunteers = volunteerService.findMatchByFirstNameAndLastName(firstName, lastName);
+        List<Volunteer> volunteers = volunteerService.findMatchAllFL(firstName, lastName);
+        List<Volunteer> volunteers2 = volunteerService.findMatchAllF(firstName);
+        modelAndView.addObject("volunteers", volunteers);
         modelAndView.addObject("volunteers", volunteers);
         httpSession.setAttribute("volunteersForMedicineResearch", volunteers);
         modelAndView.setViewName("volunteersAllF");

@@ -1,6 +1,5 @@
 package com.example.clinicaproject.service.impl;
 
-import com.example.clinicaproject.model.SideEffect;
 import com.example.clinicaproject.model.User;
 import com.example.clinicaproject.model.Volunteer;
 import com.example.clinicaproject.repository.VolunteerRepository;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.List;
 
 @Service
@@ -61,6 +59,17 @@ public class VolunteerServiceImplementation implements VolunteerService {
     @Override
     public List<Volunteer> findMatchByFirstNameAndLastName(String firstName, String lastName) {
         return volunteerRepository.findMatchByFirstNameAndLastName(firstName,lastName);
+    }
+
+
+    @Override
+    public List<Volunteer> findMatchAllFL(String firstName, String lastName) {
+        return volunteerRepository.findMatchAllFL(firstName, lastName);
+    }
+
+    @Override
+    public List<Volunteer> findMatchAllF(String firstName) {
+        return volunteerRepository.findMatchAllF(firstName);
     }
 
 //    @Override

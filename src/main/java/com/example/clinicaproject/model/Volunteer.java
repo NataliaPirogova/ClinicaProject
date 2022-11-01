@@ -28,7 +28,6 @@ public class Volunteer {
     private String middleName;//отчество
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate doB;//дата рождения
-    private int age;
     @Enumerated(EnumType.STRING)
     private Gender gender;//пол
     private long phoneNumber;

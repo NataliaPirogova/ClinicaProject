@@ -34,9 +34,9 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/volunteer/{id}")
-    public ModelAndView editUserV(ModelAndView modelAndView, @PathVariable long id) {
-        Volunteer volunteerID = volunteerService.findByUserV(userService.findById(id));
+    @GetMapping("/volunteer/{userId}")
+    public ModelAndView editUserV(ModelAndView modelAndView, @PathVariable long userId) {
+        Volunteer volunteerID = volunteerService.findByUserV(userService.findById(userId));
         Medicine medicineVolunteerID = volunteerID.getMedicine();
         Set<SideEffect> sideEffectList = sideEffectService.allSideEffects();
         modelAndView.addObject("sideEffectList", sideEffectList);
@@ -66,10 +66,6 @@ public class UserController {
         SideEffect sideEffectChoosen = sideEffectService.findByName(sideEffect.getName());
         List<Volunteer> volunteersForThisSideEffect = sideEffectChoosen.getVolunteerList();
         List<Medicine> medicinesForThisSideEffect = sideEffectChoosen.getMedicine();
-//        Set<SideEffect> sideEffectList = sideEffectService.allSideEffects();
-//        if(sideEffectList.stream().filter(s->s.getName().equals(sideEffect.getName())).toList()!=null){
-//            sideEffect.setId(sideEffectService.findByName().getId());
-//        }
         Medicine medicineVolunteerID = volunteer.getMedicine();
         volunteersForThisSideEffect.add(volunteer);
         sideEffectChoosen.setVolunteerList(volunteersForThisSideEffect);

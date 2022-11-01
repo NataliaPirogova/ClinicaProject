@@ -53,7 +53,7 @@
                 <label for="phoneNumber"></label>
                 <input type="number" id="phoneNumber" name="phoneNumber" th:value="${phoneNumber}">
             </th>
-            <button type="submit">Next</button>
+            <button type="submit">Add volunteers for trials</button>
         </form>
     </tr>
     <tr th:each="volunteer, i: ${volunteers}">
@@ -68,7 +68,6 @@
     </tr>
 </table>
 
-<a th:href="@{~/clinicalResearch}">Home page</a>
 <footer th:insert="blocks/header :: footer"></footer>
 </body>
 </html>

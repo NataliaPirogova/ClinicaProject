@@ -46,8 +46,8 @@ public class VolunteerController {
     @GetMapping(value = "/registerVolunteer")
     public ModelAndView registerPageVolunteer(ModelAndView modelAndView) {
         User user = userService.findByName(SecurityContextHolder.getContext().getAuthentication().getName());
-        long userID = user.getId();
-        httpSession.setAttribute("id", userID);
+        long userId = user.getId();
+        httpSession.setAttribute("userId", userId);
         modelAndView.setViewName("registrationVolunteer");
         return modelAndView;
     }
@@ -94,11 +94,11 @@ public class VolunteerController {
     public ModelAndView registerVolunteerPrimaryHealthInfo(@ModelAttribute("volunteerPrimaryHealthInfo") VolunteerPrimaryHealthInfo volunteerPrimaryHealthInfo) {
         ModelAndView modelAndView = new ModelAndView();
         Volunteer volunteer = (Volunteer) httpSession.getAttribute("newVolunteer");
-        long id = (long) httpSession.getAttribute("id");
+        long userId = (long) httpSession.getAttribute("userId");
         volunteerPrimaryHealthInfo.setVolunteer(volunteer);
         volunteerPrimaryHealthInfoService.addVolunteerPrimaryHealthInfo(volunteerPrimaryHealthInfo);
-        modelAndView.addObject("id",id);
-        modelAndView.setViewName("redirect:/volunteer/{id}");
+        modelAndView.addObject("userId",userId);
+        modelAndView.setViewName("redirect:/volunteer/{userId}");
         return modelAndView;
     }
 

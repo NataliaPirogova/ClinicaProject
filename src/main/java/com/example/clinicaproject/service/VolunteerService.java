@@ -25,4 +25,8 @@ public interface VolunteerService {
 
 //    void editSideEffectList (SideEffect sideEffect);
     List<Volunteer> findMatchByFirstNameAndLastName(String firstName, String lastName);
+
+    List<Volunteer> findMatchAllFL(String firstName, String lastName);
+
+    List<Volunteer> findMatchAllF(String firstName);
 }
