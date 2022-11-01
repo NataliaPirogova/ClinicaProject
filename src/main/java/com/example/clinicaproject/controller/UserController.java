@@ -54,9 +54,11 @@ public class UserController {
         User user = userService.findByName(SecurityContextHolder.getContext().getAuthentication().getName());
         volunteer = volunteerService.findByUserV(user);
         volunteerService.editVolunteer(volunteer);
-        int id = volunteer.getId();
-        modelAndView.addObject("id", id);
-        modelAndView.setViewName("redirect:/volunteer/{id}");
+        long userId = user.getId();
+        modelAndView.addObject("userId", userId);
+        int volunteerId = volunteer.getId();
+        modelAndView.addObject("volunteerId", volunteerId);
+        modelAndView.setViewName("redirect:/volunteer/{userId}");
         return modelAndView;
     }
 
@@ -74,9 +76,9 @@ public class UserController {
         medicinesForThisSideEffect.add(medicineVolunteerID);
         sideEffectChoosen.setMedicine(medicinesForThisSideEffect);
         sideEffectService.editSideEffect(sideEffectChoosen);
-        int id = volunteer.getId();
-        modelAndView.addObject("id", id);
-        modelAndView.setViewName("redirect:/volunteer/{id}");
+        long userId = user.getId();
+        modelAndView.addObject("userId", userId);
+        modelAndView.setViewName("redirect:/volunteer/{userId}");
         return modelAndView;
     }
 
