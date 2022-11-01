@@ -39,7 +39,6 @@ public class SpringSecurityConfig {
                 .authorizeHttpRequests(
                         request -> request.antMatchers(
                                         "/", "/healthcareorganizations", "/registration", "/contacts").permitAll()
-//                                .antMatchers("/medicine").hasRole("DOCTOR")
                                 .anyRequest().authenticated())
                 .formLogin(login -> login.loginPage("/login").permitAll())
                 .logout(logout -> logout.permitAll().deleteCookies("JSESSIONID"));

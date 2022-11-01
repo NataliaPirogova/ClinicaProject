@@ -33,8 +33,7 @@ public class MedicineController {
     }
 
     @GetMapping
-    public ModelAndView allMedicinePage() {
-        ModelAndView modelAndView = new ModelAndView();
+    public ModelAndView allMedicinePage(ModelAndView modelAndView) {
         List<Medicine> medicines = medicineService.allMedicines();
         modelAndView.addObject("medicines", medicines);
         modelAndView.setViewName("medicineAll");
@@ -60,15 +59,14 @@ public class MedicineController {
     }
 
     @GetMapping(value = "/registerManufacturer")
-    public ModelAndView registrationMedicineManufacturer() {
-        ModelAndView modelAndView = new ModelAndView();
+    public ModelAndView registrationMedicineManufacturer(ModelAndView modelAndView) {
         modelAndView.setViewName("registerManufacturer");
         return modelAndView;
     }
 
     @PostMapping(value = "/registerManufacturer")
-    public ModelAndView registrationMedicineManufacturer(@ModelAttribute("manufacturer") MedicineManufacturer manufacturer) {
-        ModelAndView modelAndView = new ModelAndView();
+    public ModelAndView registrationMedicineManufacturer(ModelAndView modelAndView,
+                                                         @ModelAttribute("manufacturer") MedicineManufacturer manufacturer) {
         MedicineManufacturer newManufacturer = medicineManufacturerService.add(manufacturer);
         httpSession.setAttribute("newManufacturer", newManufacturer);
         modelAndView.setViewName("redirect:/medicine/add");

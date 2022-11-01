@@ -11,7 +11,12 @@
 <table>
     <tr>
         <th>Date of Birth</th>
+        <th>email</th>
+        <th>First name</th>
+        <th>Middle name</th>
+        <th>Last name</th>
         <th>Gender</th>
+        <th>Phone</th>
         <th>Smoking</th>
         <th>Take drugs</th>
         <th>Take medicines</th>
@@ -29,18 +34,37 @@
                 <input type="date" id="DoB" name="DoB" th:value="${doB}">
             </th>
             <th>
+                <label for="email"></label>
+                <input type="text" id="email" name="email" th:value="${email}">
+            </th>
+            <th>
+                <label for="firstName"></label>
+                <input type="text" id="firstName" name="firstName" th:value="${firstName}">
+            </th>
+            <th>
+                <label for="middleName"></label>
+                <input type="text" id="middleName" name="middleName" th:value="${middleName}">
+            </th>
+            <th>
+                <label for="lastName"></label>
+                <input type="text" id="lastName" name="lastName" th:value="${lastName}" th:default="'*'">
+            </th>
+            <th>
                 <label for="gender"></label>
                 <select id="gender" name="gender">
-                    <option value="" selected disabled hidden>Choose here</option>
-                    <option th:value="FEMALE">FEMALE</option>
-                    <option th:value="MALE">MALE</option>
+                    <option th:value="FEMALE">female</option>
+                    <option th:value="MALE">male</option>
                 </select>
             </th>
             <th>
+                <label for="phoneNumber"></label>
+                <input type="number" id="phoneNumber" name="phoneNumber" th:value="${phoneNumber}">
+            </th>
+
+            <th>
                 <label for="smoking"></label>
                 <select id="smoking" name="smoking">
-                    <option value="" selected disabled hidden>Choose here</option>
-                    <option th:value="NO">NO</option>
+                    <option th:value="NO">no</option>
                     <option th:value="SMOKE_EARLIER">SMOKE_EARLIER</option>
                     <option th:value="SMOKE_SEVERAL_TIMES_A_MONTH">SMOKE_SEVERAL_TIMES_A_MONTH</option>
                     <option th:value="SMOKE_1_TIME_A_WEEK_OR_MORE_OFTEN">SMOKE_1_TIME_A_WEEK_OR_MORE_OFTEN</option>
@@ -49,16 +73,14 @@
             <th>
                 <label for="takingDrugs"></label>
                 <select id="takingDrugs" name="takingDrugs">
-                    <option value="" selected disabled hidden>Choose here</option>
-                    <option th:value="NO">NO</option>
+                    <option th:value="NO">no</option>
                     <option th:value="NOT_NOW_BUT_EARLIER">NOT_NOW_BUT_EARLIER</option>
-                    <option th:value="YES">YES</option>
+                    <option th:value="YES">yes</option>
                 </select>
             </th>
             <th>
                 <label for="takingMedicines"></label>
                 <select id="takingMedicines" name="takingMedicines">
-                    <option value="" selected disabled hidden>Choose here</option>
                     <option th:value="false">no</option>
                     <option th:value="true">yes</option>
                 </select>
@@ -66,7 +88,6 @@
             <th>
                 <label for="pregnantNow"></label>
                 <select id="pregnantNow" name="pregnantNow">
-                    <option value="" selected disabled hidden>Choose here</option>
                     <option th:value="false">no</option>
                     <option th:value="true">yes</option>
                 </select>
@@ -74,7 +95,6 @@
             <th>
                 <label for="isPlanningPregnancy"></label>
                 <select id="isPlanningPregnancy" name="isPlanningPregnancy">
-                    <option value="" selected disabled hidden>Choose here</option>
                     <option th:value=" PLANNING_THIS_YEAR">PLANNING_THIS_YEAR</option>
                     <option th:value="PLANNING_A_YEAR_AFTER_OR_LATER">PLANNING_A_YEAR_AFTER_OR_LATER</option>
                     <option th:value="NOT_PLANNING">NOT_PLANNING</option>
@@ -83,7 +103,6 @@
             <th>
                 <label for="vegetarian"></label>
                 <select id="vegetarian" name="vegetarian">
-                    <option value="" selected disabled hidden>Choose here</option>
                     <option th:value="false">no</option>
                     <option th:value="true">yes</option>
                 </select>
@@ -91,7 +110,6 @@
             <th>
                 <label for="takingHormonalContraceptives"></label>
                 <select id="takingHormonalContraceptives" name="takingHormonalContraceptives">
-                    <option value="" selected disabled hidden>Choose here</option>
                     <option th:value="false">no</option>
                     <option th:value="true">yes</option>
                 </select>
@@ -99,7 +117,6 @@
             <th>
                 <label for="sport"></label>
                 <select id="sport" name="sport">
-                    <option value="" selected disabled hidden>Choose here</option>
                     <option th:value="NO">NO</option>
                     <option th:value="PROFESSIONAL">PROFESSIONAL</option>
                     <option th:value="AMATEUR_SPORTS">AMATEUR_SPORTS</option>
@@ -108,19 +125,24 @@
             <th>
                 <label for="alcohol"></label>
                 <select id="alcohol" name="alcohol">
-                    <option value="" selected disabled hidden>Choose here</option>
                     <option th:value="NO">NO</option>
                     <option th:value="EVERY_DAY">EVERY_DAY</option>
                     <option th:value="ONLY_ON_HOLIDAYS">ONLY_ON_HOLIDAYS</option>
                     <option th:value="ONE_OR_TWO_TIMES_A_WEEK">ONE_OR_TWO_TIMES_A_WEEK</option>
                 </select>
             </th>
+            <th><input type="submit" value="Search"/></th>
             <button type="submit">Filter</button>
         </form>
     </tr>
     <tr th:each="volunteer, i: ${volunteers}">
         <td th:utext="${volunteer.doB}"></td>
+        <td th:utext="${volunteer.email}"></td>
+        <td th:utext="${volunteer.firstName}"></td>
+        <td th:utext="${volunteer.middleName}"></td>
+        <td th:utext="${volunteer.lastName}"></td>
         <td th:utext="${volunteer.gender}"></td>
+        <td th:utext="${volunteer.phoneNumber}"></td>
         <td th:utext="${volunteer.getVolunteerHabitsInfo().smoking}"></td>
         <td th:utext="${volunteer.getVolunteerHabitsInfo().takingDrugs}"></td>
         <td th:utext="${volunteer.getVolunteerHabitsInfo().takingMedicines}"></td>

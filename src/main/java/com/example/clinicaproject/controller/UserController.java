@@ -28,7 +28,9 @@ public class UserController {
     private final UserService userService;
 
     @Autowired
-    public UserController(VolunteerService volunteerService, SideEffectService sideEffectService, UserService userService) {
+    public UserController(VolunteerService volunteerService,
+                          SideEffectService sideEffectService,
+                          UserService userService) {
         this.volunteerService = volunteerService;
         this.sideEffectService = sideEffectService;
         this.userService = userService;

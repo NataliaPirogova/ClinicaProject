@@ -53,8 +53,8 @@ public class VolunteerController {
     }
 
     @PostMapping(value = "/registrationVolunteer")
-    public ModelAndView registerVolunteer(@ModelAttribute Volunteer volunteer) {
-        ModelAndView modelAndView = new ModelAndView();
+    public ModelAndView registerVolunteer(ModelAndView modelAndView,
+                                          @ModelAttribute Volunteer volunteer) {
         volunteer.setEmail(SecurityContextHolder.getContext().getAuthentication().getName());
         User user = userService.findByName(SecurityContextHolder.getContext().getAuthentication().getName());
         volunteer.setUserV(user);
@@ -65,8 +65,7 @@ public class VolunteerController {
     }
 
     @GetMapping(value = "/registrationVolunteerHabitsInfo")
-    public ModelAndView registerPageVolunteerHabits() {
-        ModelAndView modelAndView = new ModelAndView();
+    public ModelAndView registerPageVolunteerHabits(ModelAndView modelAndView) {
         Volunteer volunteer = (Volunteer) httpSession.getAttribute("newVolunteer");
         modelAndView.addObject("volunteer", volunteer);
         modelAndView.setViewName("registrationVolunteerHabitsInfo");
@@ -74,8 +73,8 @@ public class VolunteerController {
     }
 
     @PostMapping(value = "/registrationVolunteerHabitsInfo")
-    public ModelAndView registerVolunteerHabits(@ModelAttribute("volunteerHabitsInfo") VolunteerHabitsInfo volunteerHabitsInfo) {
-        ModelAndView modelAndView = new ModelAndView();
+    public ModelAndView registerVolunteerHabits(ModelAndView modelAndView,
+                                                @ModelAttribute("volunteerHabitsInfo") VolunteerHabitsInfo volunteerHabitsInfo) {
         Volunteer volunteer = (Volunteer) httpSession.getAttribute("newVolunteer");
         volunteerHabitsInfo.setVolunteer(volunteer);
         volunteerHabitsInfoService.addVolunteerHabitsInfo(volunteerHabitsInfo);
@@ -84,20 +83,19 @@ public class VolunteerController {
     }
 
     @GetMapping(value = "/registrationVolunteerPrimaryHealthInfo")
-    public ModelAndView registerPageVolunteerPrimaryHealthInfo() {
-        ModelAndView modelAndView = new ModelAndView();
+    public ModelAndView registerPageVolunteerPrimaryHealthInfo(ModelAndView modelAndView) {
         modelAndView.setViewName("registrationVolunteerPrimaryHealthInfo");
         return modelAndView;
     }
 
     @PostMapping(value = "/registrationVolunteerPrimaryHealthInfo")
-    public ModelAndView registerVolunteerPrimaryHealthInfo(@ModelAttribute("volunteerPrimaryHealthInfo") VolunteerPrimaryHealthInfo volunteerPrimaryHealthInfo) {
-        ModelAndView modelAndView = new ModelAndView();
+    public ModelAndView registerVolunteerPrimaryHealthInfo(ModelAndView modelAndView,
+                                                           @ModelAttribute("volunteerPrimaryHealthInfo") VolunteerPrimaryHealthInfo volunteerPrimaryHealthInfo) {
         Volunteer volunteer = (Volunteer) httpSession.getAttribute("newVolunteer");
         long userId = (long) httpSession.getAttribute("userId");
         volunteerPrimaryHealthInfo.setVolunteer(volunteer);
         volunteerPrimaryHealthInfoService.addVolunteerPrimaryHealthInfo(volunteerPrimaryHealthInfo);
-        modelAndView.addObject("userId",userId);
+        modelAndView.addObject("userId", userId);
         modelAndView.setViewName("redirect:/volunteer/{userId}");
         return modelAndView;
     }

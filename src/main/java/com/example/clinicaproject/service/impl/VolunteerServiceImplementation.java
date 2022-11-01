@@ -56,20 +56,27 @@ public class VolunteerServiceImplementation implements VolunteerService {
         return volunteerRepository.findByUserV(user);
     }
 
-    @Override
-    public List<Volunteer> findMatchByFirstNameAndLastName(String firstName, String lastName) {
-        return volunteerRepository.findMatchByFirstNameAndLastName(firstName,lastName);
-    }
 
-
-    @Override
-    public List<Volunteer> findMatchAllFL(String firstName, String lastName) {
-        return volunteerRepository.findMatchAllFL(firstName, lastName);
-    }
+//
+//    @Override
+//    public List<Volunteer> findMatchAllFL(String firstName, String lastName) {
+//        return volunteerRepository.findMatchAllFL(firstName, lastName);
+//    }
 
     @Override
-    public List<Volunteer> findMatchAllF(String firstName) {
-        return volunteerRepository.findMatchAllF(firstName);
+    public List<Volunteer> findMatchAllByFilters(String gender,
+                                                 String smoking,
+                                                 String takingDrugs,
+                                                 String takingMedicines,
+                                                 String isPregnantNow,
+                                                 String isPlanningPregnancy,
+                                                 String vegetarian,
+                                                 String takingHormonalContraceptives,
+                                                 String sport,
+                                                 String alcohol) {
+        return volunteerRepository.findMatchAllByFilters(gender, smoking, takingDrugs,
+                takingMedicines, isPregnantNow, isPlanningPregnancy,
+                vegetarian, takingHormonalContraceptives, sport, alcohol);
     }
 
 //    @Override

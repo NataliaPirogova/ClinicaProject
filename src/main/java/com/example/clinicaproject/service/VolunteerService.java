@@ -1,13 +1,9 @@
 package com.example.clinicaproject.service;
 
-import com.example.clinicaproject.model.SideEffect;
 import com.example.clinicaproject.model.User;
 import com.example.clinicaproject.model.Volunteer;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
-import java.util.List;
-import java.util.Set;
 
 public interface VolunteerService {
     List<Volunteer> allVolunteers();
@@ -21,12 +17,22 @@ public interface VolunteerService {
     Volunteer getVolunteerByID(int id);
 
     Volunteer findByEmail(String email);
-    Volunteer findByUserV (User user);
 
-//    void editSideEffectList (SideEffect sideEffect);
-    List<Volunteer> findMatchByFirstNameAndLastName(String firstName, String lastName);
+    Volunteer findByUserV(User user);
 
-    List<Volunteer> findMatchAllFL(String firstName, String lastName);
+////    void editSideEffectList (SideEffect sideEffect);
+//    List<Volunteer> findMatchByFirstNameAndLastName(String firstName, String lastName);
+//    List<Volunteer> findMatchAllFL(String firstName, String lastName);
+//
 
-    List<Volunteer> findMatchAllF(String firstName);
+    List<Volunteer> findMatchAllByFilters(String gender,
+                                          String smoking,
+                                          String takingDrugs,
+                                          String takingMedicines,
+                                          String isPregnantNow,
+                                          String isPlanningPregnancy,
+                                          String vegetarian,
+                                          String takingHormonalContraceptives,
+                                          String sport,
+                                          String alcohol);
 }
