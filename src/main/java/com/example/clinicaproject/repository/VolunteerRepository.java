@@ -38,34 +38,4 @@ public interface VolunteerRepository extends JpaRepository<Volunteer, Integer> {
                                           @Param("takingHormonalContraceptives") String takingHormonalContraceptives,
                                           @Param("sport") String sport,
                                           @Param("alcohol") String alcohol);
-
-
-//
-//    @Query(value = "SELECT * FROM volunteer WHERE volunteer.first_name = :fn or volunteer.last_name = :ln"
-////            ", volunteer_habits_info "
-////            "WHERE volunteer.id = volunteer_habits_info.volunteer_id"
-//            ,
-//            nativeQuery = true)
-//    List<Volunteer> findMatchAllFL(@Param("fn") String firstName, @Param("ln") String lastName);
-//
-//
-//    @Query(value = "SELECT * FROM volunteer WHERE volunteer.first_name = :fn"
-////            ", volunteer_habits_info "
-////            "WHERE volunteer.id = volunteer_habits_info.volunteer_id"
-//            ,
-//            nativeQuery = true)
-//    List<Volunteer> findMatchAllF(@Param("fn") String firstName);
-
-//    @Query(value = "SELECT * FROM volunteer AS v RIGHT JOIN volunteer_habits_info AS vhb ON vhb.volunteer_id = v.id",
-//            nativeQuery = true)
-//    List<Volunteer> findMatchAll();
-
-
-    @Query(value = "SELECT * FROM volunteer v" +
-            "JOIN volunteer_habits_info vhb ON (vhb.volunteerId = v.id)"
-//            +
-//            "HAVING v.firstName = :fn and v.lastName = :ln"
-            ,
-            nativeQuery = true)
-    List<Volunteer> findMatchByFirstNameAndLastName(@Param("fn") String firstName, @Param("ln") String lastName);
 }

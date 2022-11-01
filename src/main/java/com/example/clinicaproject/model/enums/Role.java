@@ -1,4 +1,4 @@
-package com.example.clinicaproject.model;
+package com.example.clinicaproject.model.enums;
 
 import org.springframework.security.core.GrantedAuthority;
 

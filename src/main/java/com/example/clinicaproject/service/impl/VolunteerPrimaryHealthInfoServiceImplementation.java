@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.List;
 
 @Service
 @Transactional
@@ -33,6 +32,6 @@ public class VolunteerPrimaryHealthInfoServiceImplementation implements Voluntee
 
     @Override
     public List<VolunteerPrimaryHealthInfo> allVolunteerPrimaryHealthInfo() {
-        return (List<VolunteerPrimaryHealthInfo>) volunteerPrimaryHealthInfoRepository.findAll();
+        return volunteerPrimaryHealthInfoRepository.findAll();
     }
 }

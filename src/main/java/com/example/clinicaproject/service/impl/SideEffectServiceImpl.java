@@ -53,7 +53,7 @@ public class SideEffectServiceImpl implements SideEffectService {
 
     @Override
     public void editSideEffectListForMedicine(SideEffect sideEffect, Medicine medicine) {
-        Set<SideEffect> sideEffectListCurrent = (Set<SideEffect>) sideEffectRepository.findAllByMedicine(medicine);
+        Set<SideEffect> sideEffectListCurrent = sideEffectRepository.findAllByMedicine(medicine);
         sideEffectListCurrent.add(sideEffect);
     }
 

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CustomUserDetailsService implements UserDetailsService {
-    private UserRepository userRepo;
+    private final UserRepository userRepo;
 
     public CustomUserDetailsService(UserRepository userRepo) {
         this.userRepo = userRepo;
@@ -18,11 +18,8 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepo.findByUsername(username);
-        /*List<GrantedAuthority> grantedAuthorities = user.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority(role.name())).collect(Collectors.toList());*/
         return org.springframework.security.core.userdetails.User.withUsername(user.getUsername())
                 .password(user.getPassword())
                 .authorities(user.getRoleSet().stream().map(Enum::name).toArray(String[]::new)).build();
-        //new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities)
     }
 }

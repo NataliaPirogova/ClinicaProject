@@ -3,20 +3,18 @@ package com.example.clinicaproject.service.impl;
 import com.example.clinicaproject.model.User;
 import com.example.clinicaproject.repository.UserRepository;
 import com.example.clinicaproject.service.UserService;
-import org.springframework.security.core.Transient;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.List;
 
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
-    private UserRepository userRepo;
+    private final UserRepository userRepo;
 
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     public UserServiceImpl(PasswordEncoder passwordEncoder, UserRepository userRepo) {
         this.userRepo = userRepo;
@@ -25,7 +23,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findAll() {
-        return (List<User>) userRepo.findAll();
+        return userRepo.findAll();
     }
 
     @Override

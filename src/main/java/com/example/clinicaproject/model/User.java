@@ -1,5 +1,6 @@
 package com.example.clinicaproject.model;
 
+import com.example.clinicaproject.model.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

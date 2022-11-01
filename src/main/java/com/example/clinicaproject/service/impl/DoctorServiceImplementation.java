@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.List;
 
 @Service
 @Transactional
@@ -28,7 +27,7 @@ public class DoctorServiceImplementation implements DoctorService {
 
     @Override
     public List<Doctor> allDoctors() {
-        return (List<Doctor>) doctorRepository.findAll();
+        return doctorRepository.findAll();
     }
 
     @Override

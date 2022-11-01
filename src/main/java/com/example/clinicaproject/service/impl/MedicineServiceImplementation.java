@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -40,7 +39,7 @@ public class MedicineServiceImplementation implements MedicineService {
 
     @Override
     public List<Medicine> allMedicines() {
-        return (List<Medicine>) medicineRepository.findAll();
+        return medicineRepository.findAll();
     }
 
     @Override
@@ -56,8 +55,8 @@ public class MedicineServiceImplementation implements MedicineService {
     @Override
     public String probabilityOfSideEffect(Medicine medicine, SideEffect sideEffect) {
         int allV = medicine.getVolunteer().size();
-        int sideEffectV = medicine.getVolunteer().stream().filter(s -> s.getSideEffectList().contains(sideEffect)).collect(Collectors.toList()).size();
-        double probability = 100 * (sideEffectV / allV);
+        int sideEffectV = medicine.getVolunteer().stream().filter(s -> s.getSideEffectList().contains(sideEffect)).toList().size();
+        double probability = 100 * ((double) sideEffectV / allV);
         System.out.println(probability + " %");
         return probability + " %";
     }

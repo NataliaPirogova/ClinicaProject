@@ -18,5 +18,5 @@ public interface MedicineService {
 
     int medicineCount();
 
-String probabilityOfSideEffect(Medicine medicine, SideEffect sideEffect);
+    String probabilityOfSideEffect(Medicine medicine, SideEffect sideEffect);
 }

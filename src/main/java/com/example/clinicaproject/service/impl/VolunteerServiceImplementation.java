@@ -23,7 +23,7 @@ public class VolunteerServiceImplementation implements VolunteerService {
 
     @Override
     public List<Volunteer> allVolunteers() {
-        return (List<Volunteer>) volunteerRepository.findAll();
+        return volunteerRepository.findAll();
     }
 
     @Override
@@ -56,13 +56,6 @@ public class VolunteerServiceImplementation implements VolunteerService {
         return volunteerRepository.findByUserV(user);
     }
 
-
-//
-//    @Override
-//    public List<Volunteer> findMatchAllFL(String firstName, String lastName) {
-//        return volunteerRepository.findMatchAllFL(firstName, lastName);
-//    }
-
     @Override
     public List<Volunteer> findMatchAllByFilters(String gender,
                                                  String smoking,
@@ -78,9 +71,4 @@ public class VolunteerServiceImplementation implements VolunteerService {
                 takingMedicines, isPregnantNow, isPlanningPregnancy,
                 vegetarian, takingHormonalContraceptives, sport, alcohol);
     }
-
-//    @Override
-//    public void editSideEffectList(SideEffect sideEffect) {
-//        volunteerRepository.
-//    }
 }

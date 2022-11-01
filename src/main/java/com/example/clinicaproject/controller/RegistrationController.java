@@ -1,6 +1,6 @@
 package com.example.clinicaproject.controller;
 
-import com.example.clinicaproject.model.Role;
+import com.example.clinicaproject.model.enums.Role;
 import com.example.clinicaproject.model.User;
 import com.example.clinicaproject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -20,11 +20,6 @@ public interface VolunteerService {
 
     Volunteer findByUserV(User user);
 
-////    void editSideEffectList (SideEffect sideEffect);
-//    List<Volunteer> findMatchByFirstNameAndLastName(String firstName, String lastName);
-//    List<Volunteer> findMatchAllFL(String firstName, String lastName);
-//
-
     List<Volunteer> findMatchAllByFilters(String gender,
                                           String smoking,
                                           String takingDrugs,
