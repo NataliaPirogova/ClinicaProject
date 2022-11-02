@@ -2,14 +2,18 @@
 <html xmlns:th="https://www.thymeleaf.org/" lang="en">
 <meta charset="UTF-8">
 <head>
-  <title>Error page</title>
+    <title>Error page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
 
-<h1>Error page</h1>
-<a>Error!
-You print/choose wrong</a><br>
+<h1 style="color: #3D68E0">Error page</h1>
+<p style="color: #839DE6">Oops.. You did something wrong...</p>
+<p style="color: #839DE6">Check the correctness of the entered data on the previous page.</p>
+<p style="color: #839DE6">You may not have access to the requested page.</p>
+
 <footer th:insert="blocks/header :: footer"></footer>
 </body>
 </html>

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org/" xmlns:https="http://www.w3.org/1999/xhtml" lang="en">
+<html xmlns:th="https://www.thymeleaf.org/" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>All volunteers</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
@@ -37,7 +37,6 @@
         <input type="text" id="email" name="email"
                th:placeholder="${volunteerID.email}" th:value="${email}" readonly></label>
     <br>
-    <button type="submit">Next</button>
 </form>
 
 <br><br>
@@ -46,7 +45,7 @@
         <span>Side effects that I see:</span><br>
         <span th:if="${sideEffectList != null}">
              <tr th:each="sideEffect, i: ${sideEffectList}">
-             <td th:utext="${sideEffect.name}"></td>
+             <td th:utext="${sideEffect.name}"></td><br>
              </tr>
         </span> <br>
         <form id="form2" th:action="@{/editSideEffects}" method="post" th:object="${sideEffect}">
@@ -63,7 +62,7 @@
                 </select></label><br>
             <br><br><br>
             <br>
-            <button type="submit">Next</button>
+            <div><input class="btn btn-outline-primary" type="submit" value="Add"/></div>
         </form>
 
 </th:block>

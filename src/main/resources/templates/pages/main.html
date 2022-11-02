@@ -3,16 +3,66 @@
 <meta charset="UTF-8">
 <head>
     <title>Main page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
 
-<h1>Main page</h1>
+<h3 style="color: #223070">About clinical trials</h3>
+
+<br>
+<p class="fw-bold" style="color: #434C70">Why are clinical trials conducted?</p>
+<p style="color: #434C70"> Clinical trials are part of a long process of developing a new drug that can take many
+    years.</p>
+<p style="color: #434C70">First, developers and scientists study a new drug in the laboratory. Then, if possible, use it
+    in experimental models
+    of diseases in animals. If a new treatment shows promise, researchers move on to the next step, conducting clinical
+    trials in humans.
+<p style="color: #434C70">Every year, tens of thousands of studies are conducted worldwide, involving millions of
+    patients.</p>
+<p style="color: #434C70">All members of the research teams have the necessary training and are trained in GCP (Good
+    Clinical Practice).</p>
+<p style="color: #434C70">The main benefit of participating in a clinical trial is that you will be able to access new
+    drugs that may work
+    better than existing ones.</p>
+<p style="color: #434C70"> No one knows how safe and effective a new drug is - it is in order to find out that a study
+    is being conducted.
+    However, it must be understood that studies of a particular drug move to the clinical stage only after preclinical
+    trials have been successfully completed: laboratory experiments in test tubes, on human cell cultures, on mice, on
+    other animals. Conducting human trials is expensive, and pharmaceutical companies only venture into clinical trials
+    if they believe in the possibility of success and have studied the safety of the drug.</p>
+<p style="color: #434C70">The principles of voluntariness and the fullest possible informing of participants are the
+    basis of modern standards
+    of clinical research. The ethical principles on which research should be conducted are set out in the Declaration of
+    Helsinki of the World Medical Association, adopted in 1964 and regularly updated since then. The consent of the
+    participants, according to the document, should not only be completely voluntary, but can also be withdrawn at any
+    time without explanation. In addition, everyone who agrees to become part of the study must clearly understand: what
+    exactly is being researched, what is his own interest to participate in and what risks does he bear in doing so.</p>
+<p style="color: #434C70"> Participation in a study is only necessary when the expected benefits of using a new drug may
+    outweigh the expected
+    risks. Whether this is true or not in your case, you will have to decide for yourself, after consulting with your
+    doctor.</p>
+<p style="color: #434C70"> Sometimes, especially in severe cases, participation in research is the only chance. If
+    existing, already registered
+    drugs do not work in your case, then only palliative care remains, or participation in a clinical trial. Then even a
+    small chance of success is better than nothing.</p>
+<p style="color: #434C70"> In addition to this main argument, there are additional advantages: participants in clinical
+    trials undergo thorough
+    diagnostics, treatment protocols are scrupulously observed during their treatment (usually developed by the world's
+    best specialists), throughout the entire period of participation in the study, you are under close supervision of
+    specialists participating in the study.</p>
+<p style="color: #434C70"> The financial issue should not be forgotten either: you will not be charged for treatment
+    with new drugs. All
+    examinations will also be carried out free of charge within a strict time frame.</p>
+<br><br>
 <a th:href="@{login}">Login</a><br>
 <a th:href="@{volunteer/}+${userId}">My account</a><br>
 <a th:href="@{registration}">Registration page</a><br>
 <a th:href="@{medicine}">Register medicine</a><br>
 <a th:href="@{volunteersAll}">Find all volunteers in database</a>
+<br>
+<br>
 
 <footer th:insert="blocks/header :: footer"></footer>
 </body>

@@ -3,29 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <title>All medicines</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-<p>List of medicines on clinical trials at this time</p>
+<h2 style="color: #1A2D61">List of medicines on clinical trials at this time</h2>
 
-<table>
-    <tr>
-        <th>Id</th>
-        <th>Name of medicine</th>
-        <th>Name of manufacturer</th>
-        <th>City of manufacturer</th>
-        <th>Country of manufacturer</th>
-    </tr>
-    <tr th:each="medicine, i : ${medicines}">
-        <td th:utext="${medicine.id}" type="text" name="id" id="id" th:value="id"></td>
-        <td th:utext="${medicine.medicineName}"></td>
-        <td th:utext="${medicine.getManufacturer().name}"></td>
-        <td th:utext="${medicine.getManufacturer().city}"></td>
-        <td th:utext="${medicine.getManufacturer().countryOfOrigin}"></td>
-        <td><a th:href="@{/medicine/test/}+${medicine.id}">Choose this medicine for test</a></td>
-    </tr>
-</table>
-
+<div class="container-fluid">
+    <div class="w-100 p-3" style="background-color: #eee;">
+        <div class="row justify-content-md-center">
+            <div class="table-responsive">
+                <table class="table table-bordered table-sm table-hover">
+                    <thead class="table-light">
+                    <tr>
+                        <th>Id</th>
+                        <th>Name of medicine</th>
+                        <th>Name of manufacturer</th>
+                        <th>City of manufacturer</th>
+                        <th>Country of manufacturer</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                    <tr th:each="medicine, i : ${medicines}">
+                        <td th:utext="${medicine.id}" type="text" name="id" id="id" th:value="id"></td>
+                        <td th:utext="${medicine.medicineName}"></td>
+                        <td th:utext="${medicine.getManufacturer().name}"></td>
+                        <td th:utext="${medicine.getManufacturer().city}"></td>
+                        <td th:utext="${medicine.getManufacturer().countryOfOrigin}"></td>
+                        <td><a th:href="@{/medicine/test/}+${medicine.id}">Choose this medicine for test</a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
 <a th:href="@{medicine/add}">Add new</a>
 <footer th:insert="blocks/header :: footer"></footer>

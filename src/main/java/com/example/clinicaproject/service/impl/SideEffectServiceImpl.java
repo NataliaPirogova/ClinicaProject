@@ -67,6 +67,4 @@ public class SideEffectServiceImpl implements SideEffectService {
     public SideEffect findByName(String name) {
         return sideEffectRepository.findByName(name);
     }
-
-
 }

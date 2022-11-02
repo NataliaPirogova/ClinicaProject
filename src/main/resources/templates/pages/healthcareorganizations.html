@@ -3,11 +3,28 @@
 <meta charset="UTF-8">
 <head>
     <title>Healthcare Organizations</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-<h1>On this page you can view organizations were clinical research hold</h1>
-<h2>Organizations</h2>
+<h3 style="color: #7982A8">On this page you can view organizations were clinical research hold</h3>
+<br>
+<h4 style="color: #7982A8">Organizations</h4>
+<br>
+<br>
+<h5 style="color: #7982A8">National Anti-Doping Laboratory</h5>
+<a th:href="@{https://antidoping.by/}">Official site</a>
+
+<br>
+<br>
+<h5 style="color: #7982A8">6th City Clinical Hospital</h5>
+<a th:href="@{https://6gkb.by/}">Official site</a>
+<br>
+<br>
+<h5 style="color: #7982A8">1-st Municipal Clinical Hospital</h5>
+<a th:href="@{https://www.1gkb.by/}">Official site</a>
+
 <footer th:insert="blocks/header :: footer"></footer>
 </body>
 </html>

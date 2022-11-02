@@ -45,11 +45,6 @@ public class SpringSecurityConfig {
 
         return http.build();
     }
-//
-//    @Bean
-//    public WebSecurityCustomizer webSecurityCustomizer() {
-//        return web -> web.ignoring().antMatchers("/css/", "/img/", "/js/**");
-//    }
 
     @Bean
     AuthenticationManager authenticationManager() throws Exception {

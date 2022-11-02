@@ -3,27 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Add medicine</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-<div>
-    Add new medicine for clinical trials. Fill in the following form.
-</div>
+<h2 style="color: #1A2D61">Add new medicine for clinical trials. Fill in the following form.</h2>
+<br>
 <form th:action="@{/medicine/add}" method="post" th:object="${medicine}">
     <label for="manufacturer">Choose manufacturer from database:
 
-            <ul th:each="manufacturer, i : ${manufacturers}">
-                <input type="radio" id="manufacturer" name="nameManufacturer" th:value="${manufacturer.name}" th:text="${manufacturer.name}">
-<!--                <li th:text="${manufacturer.name}"></li>-->
-            </ul>
-            <p>or</p><br>
-            <a th:href="@{/medicine/registerManufacturer}">Add new manufacturer</a>
+        <ul th:each="manufacturer, i : ${manufacturers}">
+            <input type="radio" id="manufacturer" name="nameManufacturer" th:value="${manufacturer.name}"
+                   th:text="${manufacturer.name}">
+        </ul>
+        <p>or</p><br>
+        <a th:href="@{/medicine/registerManufacturer}">Add new manufacturer</a>
     </label><br><br><br>
     <label for="medicineName">Name of medicine
         <input id="medicineName" th:type="text" th:field="*{medicineName}" required>
     </label><br>
     <br>
-    <input type="submit">
+    <div><input class="btn btn-outline-primary" type="submit" value="Register"/></div>
 </form>
 <footer th:insert="blocks/header :: footer"></footer>
 </body>

@@ -3,17 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Login page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-<div class="container">
-    <h2>Login page</h2>
-    <form action="#" th:action="@{/login}" method="post">
-        <p>Login (email): <input type="text" name="username"/></p>
-        <p>Password: <input type="password" name="password"/></p>
-        <div><input type="submit" value="Sign In"/></div>
-    </form>
-</div>
+<h2 style="color: #2F51AD">Login page</h2>
+<form th:action="@{/login}" method="post">
+
+    <div class="mb-3 row">
+        <label for="username" class="col-sm-2 col-form-label">Login (email):</label>
+        <div class="col-sm-3">
+            <input class="form-control" id="username" type="email" name="username" placeholder="mail@gmail.com"/>
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label for="password" class="col-sm-2 col-form-label">Password:</label>
+        <div class="col-sm-3">
+            <input class="form-control" id="password" type="password" name="password" placeholder="password"/>
+        </div>
+    </div>
+    <div><input class="btn btn-outline-primary" type="submit" value="Sign In"/></div>
+</form>
+
 <footer th:insert="blocks/header :: footer"></footer>
 </body>
 </html>

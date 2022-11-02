@@ -2,11 +2,67 @@
 <html xmlns:th="https://www.thymeleaf.org/" lang="en">
 <meta charset="UTF-8">
 <head>
-    <title>Title</title>
+    <title>Contact information</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-<p>Contacts</p>
+
+<div class="p-3 pb-md-4 mx-auto text-center">
+    <h3 class="display-4 fw-normal">Contacts</h3>
+    <p class="fs-5 text-muted">
+    <div class="p-3 pb-md-4 mx-auto text-center">
+        <p class="fs-5 text-muted">You can contact us in any convenient way</p>
+    </div>
+    </p>
+</div>
+
+<main>
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+        <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm">
+                <div class="card-header py-3">
+                    <h4 class="my-0 fw-normal">Phone (also Viber, Telegram, Whatsapp)</h4>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>+375 (17) 330-00-00</li>
+                        <li>+375 (29) 330-00-00 (A1)</li>
+                        <li>+375 (44) 330-00-00 (MTC)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm">
+                <div class="card-header py-3">
+                    <h4 class="my-0 fw-normal">E-mail</h4>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>info@clinicalresearh.com</li>
+                        <li>mail@clinicalresearh.com</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm">
+                <div class="card-header py-3">
+                    <h4 class="my-0 fw-normal">Instagram</h4>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li><a href="https://www.instagram.com">Clinical Research Belarus</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
 <footer th:insert="blocks/header :: footer"></footer>
 </body>
 </html>

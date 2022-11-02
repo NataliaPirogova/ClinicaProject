@@ -1,26 +1,41 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title>Spring Boot Thymeleaf + Spring Security</title>
+    <title>Registration page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-<div class="container">
-    <h2>Registration</h2>
-    <form th:action="@{/registration}" method="post" th:object="${user}">
-        <p>Name: <input type="text" th:field="*{username}"/></p>
-        <p>Password: <input type="password" th:field="*{password}"/></p>
-        <label>Roles:
-            <input type="checkbox" name="roleSet"
-                   th:each="role : ${T(com.example.clinicaproject.model.enums.Role).values()}"
-                   th:text="${role}"
-                   th:value="${role.name}"
-                   th:field="*{roleSet}"
-            />
-        </label>
-        <div><input type="submit" value="Sign In"/></div>
-    </form>
-</div>
+
+<h2 style="color: #2F51AD">Registration</h2>
+<form th:action="@{/registration}" method="post" th:object="${user}">
+    <div class="mb-3 row">
+        <label for="username" class="col-sm-2 col-form-label">Login (email):</label>
+        <div class="col-sm-3">
+            <input class="form-control" id="username" type="email" name="username" th:field="*{username}"
+                   placeholder="mail@gmail.com"/>
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label for="password" class="col-sm-2 col-form-label">Password:</label>
+        <div class="col-sm-3">
+            <input class="form-control" id="password" type="password" name="password" th:field="*{password}"
+                   placeholder="password"/>
+        </div>
+    </div>
+    <label>Roles:
+        <input type="checkbox" name="roleSet"
+               th:each="role : ${T(com.example.clinicaproject.model.enums.Role).values()}"
+               th:text="${role}"
+               th:value="${role.name}"
+               th:field="*{roleSet}"
+        />
+    </label>
+    <div><input class="btn btn-outline-primary" type="submit" value="Sign In"/></div>
+</form>
+
 <footer th:insert="blocks/header :: footer"></footer>
 </body>
 </html>
