@@ -16,4 +16,6 @@ public interface MedicineManufacturerService {
     MedicineManufacturer getMedicineManufacturerById(int id);
 
     int medicineManufacturerCount();
+
+    MedicineManufacturer findByName(String name);
 }

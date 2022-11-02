@@ -3,26 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <title>Registration form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
+<h2 style="color: #2F51AD">Fill in the form your physical parameters</h2>
 <form th:action="@{/registrationVolunteerPrimaryHealthInfo}" th:method="post" th:object="${volunteerPrimaryHealthInfo}">
-    <label for="height">Your height in millimeteres:
-        <input type="number" id="height" max="257" th:field="*{height}">
-    </label><br>
-    <label for="weight">Your weight in kg:
-        <input type="number" id="weight" th:field="*{weight}">
-    </label><br>
-    <label for="pulse">Your pulse now:
-        <input type="number" id="pulse" th:field="*{pulse}">
-    </label><br>
-    <label for="bloodPressureSystolic">Your blood pressure now:
-        <input type="number" id="bloodPressureSystolic" th:field="*{bloodPressureSystolic}">/
-    </label>
-    <label for="bloodPressureDiastolic">
-        <input type="number" id="bloodPressureDiastolic" th:field="*{bloodPressureDiastolic}">
-    </label><br>
-    <input type="submit">
+    <div class="row g-0 align-items-center">
+        <div class="col-2"><label for="height">Your height in millimeteres:</label></div>
+        <div class="col-1">
+            <input type="number" th:min="140" id="height" max="210" th:field="*{height}">
+            <br>
+        </div>
+    </div>
+    <div class="row g-0 align-items-center">
+        <div class="col-2"><label for="weight">Your weight in kg:</label></div>
+        <div class="col-1">
+            <input type="number" id="weight" th:min="45" th:max="200" th:field="*{weight}">
+            <br>
+        </div>
+    </div>
+    <div class="row g-0 align-items-center">
+        <div class="col-2"><label for="pulse">Your pulse now:</label></div>
+        <div class="col-1">
+            <input type="number" th:min="50" th:max="200" id="pulse" th:field="*{pulse}">
+            <br>
+        </div>
+    </div>
+    <div class="row g-0 align-items-center">
+        <div class="col-2">
+            <label for="bloodPressureSystolic">Your blood pressure now:</label></div>
+        <div class="col-1">
+            <input type="number" id="bloodPressureSystolic" th:min="100" th:max="250"
+                   th:field="*{bloodPressureSystolic}">/
+        </div>
+        <div class="col-1">
+            <label for="bloodPressureDiastolic">
+                <input type="number" id="bloodPressureDiastolic" th:min="50" th:max="150"
+                       th:field="*{bloodPressureDiastolic}"></label>
+            <br></div>
+        <div class="row g-1 align-items-center">
+            <div class="col-1">
+                <input class="btn btn-outline-primary" type="submit" value="Register"/></div>
+        </div>
+    </div>
 </form>
+<footer th:insert="blocks/header :: footer"></footer>
 </body>
 </html>

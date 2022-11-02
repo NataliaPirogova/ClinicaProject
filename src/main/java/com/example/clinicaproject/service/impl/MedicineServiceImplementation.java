@@ -1,6 +1,7 @@
 package com.example.clinicaproject.service.impl;
 
 import com.example.clinicaproject.model.Medicine;
+import com.example.clinicaproject.model.SideEffect;
 import com.example.clinicaproject.repository.MedicineRepository;
 import com.example.clinicaproject.service.MedicineService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +50,14 @@ public class MedicineServiceImplementation implements MedicineService {
     @Override
     public int medicineCount() {
         return (int) medicineRepository.count();
+    }
+
+    @Override
+    public String probabilityOfSideEffect(Medicine medicine, SideEffect sideEffect) {
+        int allV = medicine.getVolunteer().size();
+        int sideEffectV = medicine.getVolunteer().stream().filter(s -> s.getSideEffectList().contains(sideEffect)).toList().size();
+        double probability = 100 * ((double) sideEffectV / allV);
+        System.out.println(probability + " %");
+        return probability + " %";
     }
 }

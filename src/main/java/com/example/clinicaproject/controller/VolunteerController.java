@@ -1,12 +1,13 @@
 package com.example.clinicaproject.controller;
 
+import com.example.clinicaproject.model.User;
 import com.example.clinicaproject.model.Volunteer;
 import com.example.clinicaproject.model.VolunteerHabitsInfo;
 import com.example.clinicaproject.model.VolunteerPrimaryHealthInfo;
-import com.example.clinicaproject.service.VolunteerHabitsInfoService;
-import com.example.clinicaproject.service.VolunteerPrimaryHealthInfoService;
-import com.example.clinicaproject.service.VolunteerService;
+import com.example.clinicaproject.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,8 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
+@PreAuthorize("hasAuthority('VOLUNTEER')")
 @Controller
 public class VolunteerController {
 
@@ -24,28 +25,39 @@ public class VolunteerController {
     private final VolunteerHabitsInfoService volunteerHabitsInfoService;
     private final VolunteerPrimaryHealthInfoService volunteerPrimaryHealthInfoService;
     private final HttpSession httpSession;
+    private final MedicineService medicineService;
+    private final UserService userService;
 
     @Autowired
     public VolunteerController(VolunteerService volunteerService,
                                VolunteerHabitsInfoService volunteerHabitsInfoService,
-                               VolunteerPrimaryHealthInfoService volunteerPrimaryHealthInfoService, HttpSession httpSession) {
+                               VolunteerPrimaryHealthInfoService volunteerPrimaryHealthInfoService,
+                               HttpSession httpSession,
+                               MedicineService medicineService,
+                               UserService userService) {
         this.volunteerService = volunteerService;
         this.volunteerHabitsInfoService = volunteerHabitsInfoService;
         this.volunteerPrimaryHealthInfoService = volunteerPrimaryHealthInfoService;
         this.httpSession = httpSession;
+        this.medicineService = medicineService;
+        this.userService = userService;
     }
 
-
     @GetMapping(value = "/registerVolunteer")
-    public ModelAndView registerPageVolunteer() {
-        ModelAndView modelAndView = new ModelAndView();
+    public ModelAndView registerPageVolunteer(ModelAndView modelAndView) {
+        User user = userService.findByName(SecurityContextHolder.getContext().getAuthentication().getName());
+        long userId = user.getId();
+        httpSession.setAttribute("userId", userId);
         modelAndView.setViewName("registrationVolunteer");
         return modelAndView;
     }
 
     @PostMapping(value = "/registrationVolunteer")
-    public ModelAndView registerVolunteer(@ModelAttribute("volunteer") Volunteer volunteer) {
-        ModelAndView modelAndView = new ModelAndView();
+    public ModelAndView registerVolunteer(ModelAndView modelAndView,
+                                          @ModelAttribute Volunteer volunteer) {
+        volunteer.setEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+        User user = userService.findByName(SecurityContextHolder.getContext().getAuthentication().getName());
+        volunteer.setUserV(user);
         Volunteer volunteer1 = volunteerService.addVolunteer(volunteer);
         httpSession.setAttribute("newVolunteer", volunteer1);
         modelAndView.setViewName("redirect:/registrationVolunteerHabitsInfo");
@@ -53,15 +65,16 @@ public class VolunteerController {
     }
 
     @GetMapping(value = "/registrationVolunteerHabitsInfo")
-    public ModelAndView registerPageVolunteerHabits() {
-        ModelAndView modelAndView = new ModelAndView();
+    public ModelAndView registerPageVolunteerHabits(ModelAndView modelAndView) {
+        Volunteer volunteer = (Volunteer) httpSession.getAttribute("newVolunteer");
+        modelAndView.addObject("volunteer", volunteer);
         modelAndView.setViewName("registrationVolunteerHabitsInfo");
         return modelAndView;
     }
 
     @PostMapping(value = "/registrationVolunteerHabitsInfo")
-    public ModelAndView registerVolunteerHabits(@ModelAttribute("volunteerHabitsInfo") VolunteerHabitsInfo volunteerHabitsInfo) {
-        ModelAndView modelAndView = new ModelAndView();
+    public ModelAndView registerVolunteerHabits(ModelAndView modelAndView,
+                                                @ModelAttribute("volunteerHabitsInfo") VolunteerHabitsInfo volunteerHabitsInfo) {
         Volunteer volunteer = (Volunteer) httpSession.getAttribute("newVolunteer");
         volunteerHabitsInfo.setVolunteer(volunteer);
         volunteerHabitsInfoService.addVolunteerHabitsInfo(volunteerHabitsInfo);
@@ -70,43 +83,20 @@ public class VolunteerController {
     }
 
     @GetMapping(value = "/registrationVolunteerPrimaryHealthInfo")
-    public ModelAndView registerPageVolunteerPrimaryHealthInfo() {
-        ModelAndView modelAndView = new ModelAndView();
+    public ModelAndView registerPageVolunteerPrimaryHealthInfo(ModelAndView modelAndView) {
         modelAndView.setViewName("registrationVolunteerPrimaryHealthInfo");
         return modelAndView;
     }
 
     @PostMapping(value = "/registrationVolunteerPrimaryHealthInfo")
-    public ModelAndView registerVolunteerPrimaryHealthInfo(@ModelAttribute("volunteerPrimaryHealthInfo") VolunteerPrimaryHealthInfo volunteerPrimaryHealthInfo) {
-        ModelAndView modelAndView = new ModelAndView();
+    public ModelAndView registerVolunteerPrimaryHealthInfo(ModelAndView modelAndView,
+                                                           @ModelAttribute("volunteerPrimaryHealthInfo") VolunteerPrimaryHealthInfo volunteerPrimaryHealthInfo) {
         Volunteer volunteer = (Volunteer) httpSession.getAttribute("newVolunteer");
+        long userId = (long) httpSession.getAttribute("userId");
         volunteerPrimaryHealthInfo.setVolunteer(volunteer);
         volunteerPrimaryHealthInfoService.addVolunteerPrimaryHealthInfo(volunteerPrimaryHealthInfo);
-        modelAndView.setViewName("main");
-        return modelAndView;
-    }
-
-    @GetMapping("/volunteersAll")
-    public ModelAndView volunteersAll(ModelAndView modelAndView) {
-        List<Volunteer> volunteers = volunteerService.allVolunteers();
-        modelAndView.addObject("volunteers", volunteers);
-        modelAndView.setViewName("volunteersAll");
-        return modelAndView;
-    }
-
-    @GetMapping("/volunteersAllByPrimaryHealthInfo")
-    public ModelAndView volunteersAllByPrimaryHealthInfo(ModelAndView modelAndView) {
-        List<VolunteerPrimaryHealthInfo> volunteerPrimaryHealthInfoList = volunteerPrimaryHealthInfoService.allVolunteerPrimaryHealthInfo();
-        modelAndView.addObject("volunteerPrimaryHealthInfoAll", volunteerPrimaryHealthInfoList);
-        modelAndView.setViewName("volunteersAllByPrimaryHealthInfo");
-        return modelAndView;
-    }
-
-    @GetMapping("/volunteersAllByHabitsInfo")
-    public ModelAndView volunteersAllByHabitsInfo(ModelAndView modelAndView) {
-        List<VolunteerHabitsInfo> volunteerHabitsInfoList = volunteerHabitsInfoService.allVolunteerHabitsInfo();
-        modelAndView.addObject("volunteerHabitsInfos", volunteerHabitsInfoList);
-        modelAndView.setViewName("volunteersAllByHabitsInfo");
+        modelAndView.addObject("userId", userId);
+        modelAndView.setViewName("redirect:/volunteer/{userId}");
         return modelAndView;
     }
 

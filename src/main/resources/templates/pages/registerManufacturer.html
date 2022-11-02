@@ -3,22 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>Registration of manufacturer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 <body>
+<header th:insert="blocks/header :: header"></header>
 <h3>Register a new manufacturer</h3>
 <form th:action="@{/medicine/registerManufacturer}" method="post" th:object="${manufacturer}">
-    <label for="name">Name
-        <input id="name" type="text" th:field="*{name}"></label><br>
-    <label for="site">Site of manufacturer
-        <input id="site" type="text" th:field="*{site}"></label><br>
-    <label for="email">E-mail
-        <input id="email" type="text" th:field="*{email}"></label><br>
-    <label for="countryOfOrigin">Country of origin
-        <input id="countryOfOrigin" type="text" th:field="*{countryOfOrigin}"></label><br>
-    <label for="city">City
-        <input id="city" type="text" th:field="*{city}"></label><br>
-    <input type="submit">
-</form>
+    <div class="mb-3 row">
+        <label for="name" class="col-sm-2 col-form-label">Name</label>
+        <div class="col-sm-3">
+            <input class="form-control" id="name" type="text" name="name" th:field="*{name}" required/>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label for="site" class="col-sm-2 col-form-label">Site of manufacturer</label>
+        <div class="col-sm-3">
+            <input class="form-control" id="site" type="text" name="site" th:field="*{site}"/>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label for="email" class="col-sm-2 col-form-label">E-mail</label>
+        <div class="col-sm-3">
+            <input class="form-control" id="email" type="email" name="email" th:field="*{site}"/>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label for="countryOfOrigin" class="col-sm-2 col-form-label">Country of origin</label>
+        <div class="col-sm-3">
+            <input class="form-control" id="countryOfOrigin" type="text" name="countryOfOrigin"
+                   th:field="*{countryOfOrigin}"/>
+        </div>
+    </div>
 
+    <div><input class="btn btn-outline-primary" type="submit" value="Register"/>
+    </div>
+</form>
+<footer th:insert="blocks/header :: footer"></footer>
 </body>
 </html>

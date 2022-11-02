@@ -31,6 +31,11 @@ public class VolunteerHabitsInfoServiceImplementation implements VolunteerHabits
     }
 
     @Override
+    public VolunteerHabitsInfo findVolunteerHabitsInfo(int id) {
+        return volunteerHabitsInfoRepository.findById(id).orElseThrow(RuntimeException::new);
+    }
+
+    @Override
     public List<VolunteerHabitsInfo> allVolunteerHabitsInfo() {
         return volunteerHabitsInfoRepository.findAll();
     }

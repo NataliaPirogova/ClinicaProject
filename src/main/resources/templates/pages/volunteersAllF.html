@@ -34,7 +34,7 @@
                     </thead>
                     <tbody class="table-group-divider">
                     <tr>
-                        <form th:action="@{/volunteersAll}" method="post">
+                        <form th:action="@{/volunteersAllFiltered}" method="post">
                             <th>
                                 <label for="DoB"></label>
                                 <input type="date" id="DoB" name="DoB" th:value="${doB}">
@@ -133,7 +133,7 @@
                                 </select>
                             </th>
                             <div>
-                                <button class="btn btn-outline-primary" type="submit" value="Filter">Filter</button>
+                                <button class="btn btn-outline-primary" type="submit" value="Filter">Add</button>
                             </div>
                         </form>
                     </tr>

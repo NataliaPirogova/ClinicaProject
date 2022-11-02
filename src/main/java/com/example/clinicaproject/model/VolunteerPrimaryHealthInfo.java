@@ -10,15 +10,17 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Data
 @Entity
+@Table(name = "volunteer_primary_health_info")
 public class VolunteerPrimaryHealthInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
     private int height;
     private int weight;
     private int pulse;
     private int bloodPressureSystolic;
     private int bloodPressureDiastolic;
-    @OneToOne(mappedBy = "volunteerPrimaryHealthInfo")
+    @OneToOne
     private Volunteer volunteer;
 }

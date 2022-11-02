@@ -50,4 +50,9 @@ public class MedicineManufacturerServiceImplementation implements MedicineManufa
     public int medicineManufacturerCount() {
         return (int) medicineManufacturerRepository.count();
     }
+
+    @Override
+    public MedicineManufacturer findByName(String name) {
+        return medicineManufacturerRepository.findByName(name);
+    }
 }

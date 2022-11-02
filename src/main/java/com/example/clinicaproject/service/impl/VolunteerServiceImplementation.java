@@ -1,26 +1,18 @@
 package com.example.clinicaproject.service.impl;
 
-import com.example.clinicaproject.model.Role;
+import com.example.clinicaproject.model.User;
 import com.example.clinicaproject.model.Volunteer;
 import com.example.clinicaproject.repository.VolunteerRepository;
 import com.example.clinicaproject.service.VolunteerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
 @Transactional
-public class VolunteerServiceImplementation implements VolunteerService, UserDetailsService {
+public class VolunteerServiceImplementation implements VolunteerService {
 
     private final VolunteerRepository volunteerRepository;
 
@@ -36,7 +28,6 @@ public class VolunteerServiceImplementation implements VolunteerService, UserDet
 
     @Override
     public Volunteer addVolunteer(Volunteer volunteer) {
-        volunteer.setPassword(new BCryptPasswordEncoder().encode(volunteer.getPassword()));
         return volunteerRepository.save(volunteer);
     }
 
@@ -56,10 +47,28 @@ public class VolunteerServiceImplementation implements VolunteerService, UserDet
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Volunteer volunteer = volunteerRepository.findByEmail(username);
-        return User.withUsername(volunteer.getEmail())
-                .password(volunteer.getPassword())
-                .authorities(Set.of(new SimpleGrantedAuthority(Role.VOLUNTEER.name()))).build();
+    public Volunteer findByEmail(String email) {
+        return volunteerRepository.findByEmail(email);
+    }
+
+    @Override
+    public Volunteer findByUserV(User user) {
+        return volunteerRepository.findByUserV(user);
+    }
+
+    @Override
+    public List<Volunteer> findMatchAllByFilters(String gender,
+                                                 String smoking,
+                                                 String takingDrugs,
+                                                 String takingMedicines,
+                                                 String isPregnantNow,
+                                                 String isPlanningPregnancy,
+                                                 String vegetarian,
+                                                 String takingHormonalContraceptives,
+                                                 String sport,
+                                                 String alcohol) {
+        return volunteerRepository.findMatchAllByFilters(gender, smoking, takingDrugs,
+                takingMedicines, isPregnantNow, isPlanningPregnancy,
+                vegetarian, takingHormonalContraceptives, sport, alcohol);
     }
 }

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All volunteers</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<h3>My information</h3>
+
+<form id="form1" th:action="@{/editVolunteer}" method="post" th:object="${volunteerID}">
+
+    <label for="firstName">
+        <input type="text" id="firstName" name="firstName" th:placeholder="${volunteerID.firstName}"
+               th:value="${firstName}" readonly></label><br>
+    <label for="middleName">
+        <input type="text" id="middleName" name="middleName" th:placeholder="${volunteerID.middleName}"
+               th:value="${middleName}" readonly></label><br>
+    <label for="lastName">
+        <input type="text" id="lastName" name="lastName" th:placeholder="${volunteerID.lastName}"
+               th:value="${lastName}" readonly></label><br>
+
+    <label for="DoB">
+        <input type="text" id="DoB" name="DoB" th:placeholder="${volunteerID.doB}" th:value="${DoB}"
+               readonly></label><br>
+    <label for="gender">
+        <input type="number" id="gender" name="gender"
+               th:placeholder="${volunteerID.gender}" th:value="${gender}" readonly>
+    </label><br>
+    <label for="phoneNumber">
+        <input type="number" id="phoneNumber" name="phoneNumber"
+               th:placeholder="${volunteerID.phoneNumber}" th:value="${phoneNumber}" readonly></label>
+    <br>
+    <label for="email">
+        <input type="text" id="email" name="email"
+               th:placeholder="${volunteerID.email}" th:value="${email}" readonly></label>
+    <br>
+</form>
+
+<br><br>
+<th:block th:if="${medicineVolunteerID != null}">
+    <td>
+        <span>Side effects that I see:</span><br>
+        <span th:if="${sideEffectList != null}">
+             <tr th:each="sideEffect, i: ${sideEffectList}">
+             <td th:utext="${sideEffect.name}"></td><br>
+             </tr>
+        </span> <br>
+        <form id="form2" th:action="@{/editSideEffects}" method="post" th:object="${sideEffect}">
+            <br>
+            <span>Add new side effect</span>
+            <br>
+            <label for="name">
+                <select class="form-control" id="name" name="name">
+                    <option value="">Select task for disable</option>
+                    <option th:each="sideEffect1 : ${sideEffectList}"
+                            th:value="${sideEffect1.name}"
+                            th:text="${sideEffect1.name}">
+                    </option>
+                </select></label><br>
+            <br><br><br>
+            <br>
+            <div><input class="btn btn-outline-primary" type="submit" value="Add"/></div>
+        </form>
+
+</th:block>
+<br>
+<br>
+
+<footer th:insert="blocks/header :: footer"></footer>
+</body>
+</html>

@@ -10,5 +10,7 @@ public interface VolunteerHabitsInfoService {
 
     void editVolunteerHabitsInfo(VolunteerHabitsInfo volunteerHabitsInfo);
 
+    VolunteerHabitsInfo findVolunteerHabitsInfo(int id);
+
     List<VolunteerHabitsInfo> allVolunteerHabitsInfo();
 }
