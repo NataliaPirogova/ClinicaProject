@@ -43,8 +43,8 @@
 <th:block th:if="${medicineVolunteerID != null}">
     <td>
         <span>Side effects that I see:</span><br>
-        <span th:if="${sideEffectList != null}">
-             <tr th:each="sideEffect, i: ${sideEffectList}">
+        <span th:if="${sideEffectListV != null}">
+             <tr th:each="sideEffect, i: ${sideEffectListV}">
              <td th:utext="${sideEffect.name}"></td><br>
              </tr>
         </span> <br>
@@ -68,6 +68,7 @@
 </th:block>
 <br>
 <br>
+
 
 <footer th:insert="blocks/header :: footer"></footer>
 </body>

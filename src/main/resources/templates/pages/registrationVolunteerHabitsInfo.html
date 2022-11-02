@@ -37,76 +37,77 @@
         <div class="col-3">
             <label for="takingMedicines">I take any medicine permanently</label></div>
         <div class="col-3">
-            <input type="checkbox" id="takingMedicines"/>
-            <br>
+            <input type="checkbox" id="takingMedicines"/></div>
+        <br>
+        <div class="row g-3 align-items-center">
+            <div class="col-3">
             <span th:if="${volunteer.gender == T(com.example.clinicaproject.model.enums.Gender).FEMALE}">
+                <label for="isPregnantNow">I am pregnant now</label></span></div>
+            <div class="col-3">
+                <span th:if="${volunteer.gender == T(com.example.clinicaproject.model.enums.Gender).FEMALE}">
+                    <input type="checkbox" id="isPregnantNow"/><br></span>
+            </div>
         </div>
-    </div>
-    <div class="row g-3 align-items-center">
-        <div class="col-3">
-            <label for="isPregnantNow">I am pregnant now</label></div>
-        <div class="col-3">
-            <input type="checkbox" id="isPregnantNow"/><br>
-        </div>
-    </div>
-    <div class="row g-3 align-items-center">
-        <div class="col-3">
-            <label for="isPlanningPregnancy">Do you planning pregnancy?</label></div>
-        <div class="col-3">
+        <div class="row g-3 align-items-center">
+            <div class="col-3">
+            <span th:if="${volunteer.gender == T(com.example.clinicaproject.model.enums.Gender).FEMALE}">
+                <label for="isPlanningPregnancy">Do you planning pregnancy?</label></span></div>
+            <div class="col-3">
+            <span th:if="${volunteer.gender == T(com.example.clinicaproject.model.enums.Gender).FEMALE}">
             <select id="isPlanningPregnancy" th:field="*{isPlanningPregnancy}" th:default="NOT_PLANNING">
                 <option th:value="PLANNING_THIS_YEAR">Planning this year</option>
                 <option th:value="PLANNING_A_YEAR_AFTER_OR_LATER">Planning a year after or later</option>
                 <option th:value="NOT_PLANNING" selected="selected">Not planning</option>
             </select></span><br>
-            <span th:if="${volunteer.gender == T(com.example.clinicaproject.model.enums.Gender).MALE}">
+                <span th:if="${volunteer.gender == T(com.example.clinicaproject.model.enums.Gender).MALE}">
             <input type="checkbox" id="isPregnantNow" th:default="false" hidden/><br>
          <select id="isPlanningPregnancy" th:field="*{isPlanningPregnancy}" hidden>
             <option th:value="NOT_PLANNING" selected="selected" hidden>Not planning</option>
         </select>
     </span><br>
-        </div>
-    </div>
-    <div class="row g-3 align-items-center">
-        <div class="col-3">
-            <label for="vegetarian"> I am vegetarian</label></div>
-        <div class="col-3">
-            <input type="checkbox" id="vegetarian" name="vegetarian"/>
-            <br>
-        </div>
-    </div>
-    <div class="row g-3 align-items-center">
-        <div class="col-3">
-            <label for="takingHormonalContraceptives">I am taking hormonal contraceptives now</label></div>
-        <div class="col-3">
-            <input type="checkbox" id="takingHormonalContraceptives"><br>
-        </div>
-    </div>
-    <div class="row g-3 align-items-center">
-        <div class="col-3">
-            <label for="sport">Do you make sport in your life?</label></div>
-        <div class="col-3">
-            <select id="sport" th:field="*{sport}">
-                <option value="NO">No</option>
-                <option value="PROFESSIONAL">I am professional sportsman</option>
-                <option value="AMATEUR_SPORTS">I am amateur sportsman</option>
-            </select><br>
-        </div>
-    </div>
-    <div class="row g-3 align-items-center">
-        <div class="col-3">
-            <label for="alcohol">How often do you drink alcohol?</label></div>
-        <div class="col-3">
-            <select id="alcohol" th:field="*{alcohol}">
-                <option value="NO">No at all</option>
-                <option value="EVERY_DAY">Every day</option>
-                <option value="ONLY_ON_HOLIDAYS">Only on holidays</option>
-                <option value="ONE_OR_TWO_TIMES_A_WEEK">One or two times a week</option>
-            </select><br></div>
-        <div class="row g-3 align-items-center">
-            <div class="col-1">
-                <input class="btn btn-outline-primary" type="submit" value="Next"/>
             </div>
         </div>
+        <div class="row g-3 align-items-center">
+            <div class="col-3">
+                <label for="vegetarian"> I am vegetarian</label></div>
+            <div class="col-3">
+                <input type="checkbox" id="vegetarian" name="vegetarian"/>
+                <br>
+            </div>
+        </div>
+        <div class="row g-3 align-items-center">
+            <div class="col-3">
+                <label for="takingHormonalContraceptives">I am taking hormonal contraceptives now</label></div>
+            <div class="col-3">
+                <input type="checkbox" id="takingHormonalContraceptives"><br>
+            </div>
+        </div>
+        <div class="row g-3 align-items-center">
+            <div class="col-3">
+                <label for="sport">Do you make sport in your life?</label></div>
+            <div class="col-3">
+                <select id="sport" th:field="*{sport}">
+                    <option value="NO">No</option>
+                    <option value="PROFESSIONAL">I am professional sportsman</option>
+                    <option value="AMATEUR_SPORTS">I am amateur sportsman</option>
+                </select><br>
+            </div>
+        </div>
+        <div class="row g-3 align-items-center">
+            <div class="col-3">
+                <label for="alcohol">How often do you drink alcohol?</label></div>
+            <div class="col-3">
+                <select id="alcohol" th:field="*{alcohol}">
+                    <option value="NO">No at all</option>
+                    <option value="EVERY_DAY">Every day</option>
+                    <option value="ONLY_ON_HOLIDAYS">Only on holidays</option>
+                    <option value="ONE_OR_TWO_TIMES_A_WEEK">One or two times a week</option>
+                </select><br></div>
+            <div class="row g-3 align-items-center">
+                <div class="col-1">
+                    <input class="btn btn-outline-primary" type="submit" value="Next"/>
+                </div>
+            </div>
 </form>
 <footer th:insert="blocks/header :: footer"></footer>
 </body>

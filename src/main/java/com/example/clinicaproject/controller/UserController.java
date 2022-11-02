@@ -41,7 +41,9 @@ public class UserController {
         Volunteer volunteerID = volunteerService.findByUserV(userService.findById(userId));
         Medicine medicineVolunteerID = volunteerID.getMedicine();
         Set<SideEffect> sideEffectList = sideEffectService.allSideEffects();
+        Set<SideEffect> sideEffectListV = volunteerID.getSideEffectList();
         modelAndView.addObject("sideEffectList", sideEffectList);
+        modelAndView.addObject("sideEffectListV", sideEffectListV);
         modelAndView.addObject("volunteerID", volunteerID);
         modelAndView.addObject("medicineVolunteerID", medicineVolunteerID);
         modelAndView.setViewName("userVInformation");
